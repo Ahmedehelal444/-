@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> حلة الازمنة - Medo Farfosh</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{min-height:100vh;font-family:"Amiri",serif;background:linear-gradient(180deg,#1565c0 0%,#2196f3 25%,#64b5f6 55%,#b3d9ff 75%,#dff0ff 100%);overflow-x:hidden}
+.sun{position:fixed;top:35px;left:70px;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,#fff9c4 20%,#ffe03a 60%,#ffc107 100%);box-shadow:0 0 50px 18px rgba(255,220,40,.55);animation:sunp 4s ease-in-out infinite;z-index:2}
+@keyframes sunp{0%,100%{box-shadow:0 0 50px 18px rgba(255,220,40,.55)}50%{box-shadow:0 0 70px 30px rgba(255,220,40,.75)}}
+.rays{position:absolute;inset:0;border-radius:50%;animation:rot 18s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+.ray{position:absolute;top:50%;left:50%;width:120px;height:3px;background:linear-gradient(to right,rgba(255,240,100,.85),transparent);transform-origin:left center;border-radius:2px}
+.cloud{position:fixed;background:#fff;border-radius:60px;opacity:.88}
+.cloud::before,.cloud::after{content:"";position:absolute;background:#fff;border-radius:50%}
+.c1{width:200px;height:58px;top:70px;animation:drift 32s linear infinite}
+.c1::before{width:95px;height:88px;top:-44px;left:28px}.c1::after{width:72px;height:72px;top:-36px;left:105px}
+.c2{width:155px;height:48px;top:145px;animation:drift 42s linear infinite 8s;opacity:.78}
+.c2::before{width:75px;height:68px;top:-34px;left:22px}.c2::after{width:58px;height:58px;top:-28px;left:82px}
+.c3{width:125px;height:42px;top:48px;animation:drift 28s linear infinite 4s;opacity:.72}
+.c3::before{width:62px;height:58px;top:-29px;left:14px}.c3::after{width:52px;height:52px;top:-24px;left:63px}
+@keyframes drift{from{transform:translateX(-320px)}to{transform:translateX(110vw)}}
+.birds{position:fixed;top:165px;right:12%;animation:fly 22s linear infinite 2s;z-index:2}
+.bird{position:absolute;width:26px;height:9px;border-top:3px solid #1a3a70;border-radius:50% 50% 0 0}
+.bird::before{content:"";position:absolute;width:13px;height:9px;border-top:3px solid #1a3a70;border-radius:50% 50% 0 0;top:-3px;left:13px}
+.b1{top:0;left:0}.b2{top:18px;left:32px}.b3{top:-8px;left:56px}.b4{top:12px;left:82px}
+@keyframes fly{from{transform:translateX(0)}to{transform:translateX(-115vw)}}
+.ground{position:fixed;bottom:0;left:0;right:0;height:110px;background:linear-gradient(180deg,#4caf50,#2e7d32);border-radius:60% 60% 0 0/28px 28px 0 0;z-index:3}
+.gblade{position:fixed;bottom:75px;width:5px;background:#388e3c;border-radius:3px 3px 0 0;transform-origin:bottom;z-index:4;animation:sw 2s ease-in-out infinite}
+@keyframes sw{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+.flower{position:fixed;z-index:5;font-size:1.7rem;animation:sw 2.5s ease-in-out infinite}
+.rainbow{position:fixed;bottom:88px;left:50%;transform:translateX(-50%);width:460px;height:230px;border-radius:230px 230px 0 0;z-index:2;opacity:.4;box-shadow:0 0 0 7px rgba(255,0,0,.3),0 0 0 14px rgba(255,127,0,.25),0 0 0 21px rgba(255,255,0,.2),0 0 0 28px rgba(0,200,0,.18),0 0 0 35px rgba(0,80,255,.15)}
+.sparkle{position:fixed;background:#fff;border-radius:50%;animation:tw 3s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.1}50%{opacity:.7}}
+/* PAGES */
+.pg{display:none;position:relative;z-index:10;min-height:100vh;flex-direction:column;align-items:center;padding:50px 20px 160px}
+.pg.on{display:flex;animation:pi .4s ease}
+@keyframes pi{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+/* HEADER */
+.hcard{background:linear-gradient(135deg,rgba(255,255,255,.9),rgba(220,242,255,.85));border:2.5px solid rgba(255,255,255,.95);border-radius:24px;padding:34px 52px 28px;text-align:center;max-width:720px;width:92%;box-shadow:0 20px 60px rgba(0,60,160,.22);animation:flt 6s ease-in-out infinite;margin-bottom:34px}
+@keyframes flt{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.orn{font-size:2.2rem;color:#fff;letter-spacing:8px;margin-bottom:8px;opacity:.9}
+.mtitle{font-family:"Scheherazade New",serif;font-size:4.8rem;font-weight:700;color:#0a3870;line-height:1.25}
+.dvdr{width:75%;height:2px;background:linear-gradient(to right,transparent,#3a8ae0,transparent);margin:14px auto;border-radius:2px}
+.stitle{font-family:"Scheherazade New",serif;font-size:3.6rem;font-weight:700;color:#0d52a0}
+/* TOPIC BOX */
+.tbox{background:linear-gradient(135deg,rgba(255,255,255,.88),rgba(220,242,255,.82));border:2px solid rgba(255,255,255,.9);border-radius:22px;padding:28px 40px;text-align:center;max-width:600px;width:92%;box-shadow:0 12px 40px rgba(0,60,160,.18);margin-bottom:32px}
+.tbox{transition:transform .18s,box-shadow .18s;}
+.tbox:hover{transform:translateY(-4px);box-shadow:0 18px 50px rgba(0,60,160,.3);}
+.ttitle{font-family:"Scheherazade New",serif;font-size:2.2rem;font-weight:700;color:#0a3870;margin-bottom:20px}
+.mbtns{display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
+/* BUTTONS */
+.mbtn{border:none;border-radius:16px;padding:16px 36px;font-family:"Scheherazade New",serif;font-size:1.6rem;font-weight:700;cursor:pointer;transition:transform .2s}
+.mbtn:hover{transform:translateY(-4px) scale(1.04)}
+.mbtn:active{transform:scale(.97)}
+.solo-btn{background:linear-gradient(135deg,#1565c0,#42a5f5);color:#fff;box-shadow:0 6px 22px rgba(21,101,192,.45)}
+.z-btn{background:linear-gradient(135deg,#4a0e0e,#b71c1c);color:#fff;box-shadow:0 6px 22px rgba(100,0,0,.5)}
+.nbtn{border:none;border-radius:12px;padding:10px 28px;font-family:"Scheherazade New",serif;font-size:1.25rem;font-weight:700;cursor:pointer;transition:transform .2s}
+.nbtn:hover{transform:translateY(-2px) scale(1.03)}
+.nbtn:active{transform:scale(.97)}
+.nb-blue{background:linear-gradient(135deg,#1565c0,#42a5f5);color:#fff;box-shadow:0 4px 14px rgba(21,101,192,.4)}
+.nb-red{background:linear-gradient(135deg,#b71c1c,#e53935);color:#fff;box-shadow:0 4px 14px rgba(150,0,0,.4)}
+.nb-green{background:linear-gradient(135deg,#2e7d32,#66bb6a);color:#fff;box-shadow:0 4px 14px rgba(46,125,50,.4)}
+.nb-gray{background:linear-gradient(135deg,#546e7a,#90a4ae);color:#fff;box-shadow:0 4px 10px rgba(0,0,0,.2)}
+.nb-orange{background:linear-gradient(135deg,#e65100,#ff9800);color:#fff;box-shadow:0 4px 14px rgba(200,80,0,.4)}
+.brow{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:14px}
+/* CARD */
+.card{background:linear-gradient(135deg,rgba(255,255,255,.93),rgba(224,242,255,.88));border:2px solid rgba(255,255,255,.9);border-radius:22px;padding:30px 38px;max-width:780px;width:92%;box-shadow:0 18px 55px rgba(0,60,160,.2);margin-bottom:20px;animation:pi .4s ease}
+/* Q STYLE */
+.qlbl{font-family:"Scheherazade New",serif;font-size:1.3rem;font-weight:700;color:#1565c0;background:rgba(33,150,243,.12);border-radius:10px;padding:5px 14px;display:inline-block;margin-bottom:12px;border:1px solid rgba(33,150,243,.25)}
+.qtxt{font-family:"Amiri",serif;font-size:1.45rem;color:#0d3060;margin-bottom:18px;line-height:1.9;background:rgba(33,150,243,.07);border-radius:12px;padding:13px 18px;border-right:4px solid #1e88e5;direction:ltr;text-align:left}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.cbtn{background:rgba(255,255,255,.85);border:2px solid rgba(33,150,243,.35);border-radius:13px;padding:12px 14px;font-family:"Amiri",serif;font-size:1.3rem;color:#0a3060;cursor:pointer;text-align:center;transition:all .2s;direction:ltr;font-weight:bold}
+.cbtn:hover:not(:disabled){background:rgba(33,150,243,.15);border-color:#1565c0;transform:translateY(-2px)}
+.cbtn.ok{background:rgba(56,142,60,.18);border-color:#388e3c;color:#1b5e20}
+.cbtn.bad{background:rgba(211,47,47,.13);border-color:#c62828;color:#7f0000}
+.cbtn:disabled{cursor:default;transform:none!important}
+.rmsg{margin-top:12px;padding:12px 16px;border-radius:13px;font-family:"Scheherazade New",serif;font-size:1.3rem;font-weight:700;display:none}
+.rmsg.ok{background:rgba(56,142,60,.15);color:#1b5e20;border:2px solid rgba(56,142,60,.4)}
+.rmsg.bad{background:rgba(211,47,47,.12);color:#7f0000;border:2px solid rgba(200,50,50,.35)}
+/* SCOREBOARD */
+.sb{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-bottom:14px}
+.pc{border-radius:13px;padding:9px 14px;text-align:center;min-width:100px;border:2px solid;transition:all .3s}
+.pc.alive{background:rgba(33,150,243,.1);border-color:rgba(33,150,243,.4);color:#0a3060}
+.pc.zombie{background:rgba(120,0,0,.12);border-color:rgba(180,0,0,.4);color:#7f0000}
+.pc.out{background:rgba(80,80,80,.1);border-color:rgba(80,80,80,.3);color:#555;opacity:.5}
+.pc.cur{box-shadow:0 0 0 3px #ffd700;transform:scale(1.07)}
+.pcn{font-family:"Scheherazade New",serif;font-size:1.05rem;font-weight:700}
+.pcp{font-size:.95rem;margin-top:2px}
+.pcb{font-size:.85rem;margin-top:2px;letter-spacing:2px}
+/* TURN HDR */
+.thdr{text-align:center;margin-bottom:14px;font-family:"Scheherazade New",serif;font-size:1.8rem;font-weight:700;color:#0a3870;background:rgba(33,150,243,.1);border-radius:14px;padding:10px 18px}
+/* NAMES */
+.nrow{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.nnum{font-family:"Scheherazade New",serif;font-size:1.6rem;font-weight:700;color:#1565c0;min-width:26px;text-align:center}
+.ninp{flex:1;border:2px solid rgba(33,150,243,.4);border-radius:12px;padding:11px 14px;font-family:"Amiri",serif;font-size:1.15rem;color:#0a3060;background:rgba(255,255,255,.85);outline:none;direction:rtl}
+.ninp:focus{border-color:#1565c0;background:#fff}
+/* SHOP */
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:10px}
+.si{border-radius:13px;padding:13px;text-align:center;border:2px solid;cursor:pointer;transition:all .2s;font-family:"Amiri",serif}
+.si:hover:not(.dis){transform:translateY(-3px) scale(1.03)}
+.si.dis{opacity:.4;cursor:default}
+.si-t{font-family:"Scheherazade New",serif;font-size:1.1rem;font-weight:700;margin-bottom:3px}
+.si-c{font-size:.95rem;font-weight:700;margin-bottom:5px}
+.si-d{font-size:.88rem;line-height:1.5}
+.s-sh{background:rgba(33,150,243,.1);border-color:rgba(33,150,243,.5);color:#0a3060}
+.s-zb{background:rgba(120,0,0,.1);border-color:rgba(180,0,0,.5);color:#7f0000}
+.s-st{background:rgba(180,100,0,.1);border-color:rgba(200,120,0,.5);color:#5f3000}
+.s-sc{background:rgba(80,0,120,.1);border-color:rgba(100,0,150,.5);color:#3a0060}
+.s-sl{background:rgba(50,50,50,.08);border-color:rgba(80,80,80,.4);color:#2a2a2a}
+/* TARGETS */
+.tgts{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-top:12px}
+.tgt{border:2px solid rgba(33,150,243,.5);border-radius:12px;padding:9px 18px;font-family:"Amiri",serif;font-size:1.1rem;font-weight:700;cursor:pointer;background:rgba(255,255,255,.8);color:#0a3060;transition:all .2s}
+.tgt:hover{background:rgba(33,150,243,.2);transform:scale(1.05)}
+/* NOTICE */
+.notice{text-align:center;font-family:"Amiri",serif;font-size:.95rem;color:#555;line-height:1.7;margin-top:10px;background:rgba(33,150,243,.06);border-radius:10px;padding:9px 14px}
+/* FREEDOM */
+.fc{text-align:center;font-family:"Scheherazade New",serif;font-size:1.35rem;color:#1b5e20;margin-bottom:12px;font-weight:700}
+/* TOAST */
+#toast{position:fixed;top:80px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.82);color:#fff;padding:12px 28px;border-radius:14px;font-family:"Amiri",serif;font-size:1.2rem;z-index:9999;text-align:center;max-width:80%;display:none}
+
+/* DEVICE SIZE CLASSES */
+body.dev-phone  { font-size: 11px; }
+body.dev-tablet { font-size: 17px; }
+body.dev-pc     { font-size: 20px; }
+body.dev-phone  .cbtn { font-size: .85rem; padding: 7px 8px; }
+body.dev-tablet .cbtn { font-size: 1.3rem; padding: 13px 16px; }
+body.dev-pc     .cbtn { font-size: 1.6rem; padding: 16px 22px; }
+body.dev-phone  .nbtn { font-size: .8rem; padding: 6px 12px; }
+body.dev-tablet .nbtn { font-size: 1.2rem; padding: 10px 24px; }
+body.dev-pc     .nbtn { font-size: 1.5rem; padding: 14px 34px; }
+body.dev-phone  .mbtn { font-size: .95rem; padding: 9px 16px; }
+body.dev-tablet .mbtn { font-size: 1.5rem; padding: 15px 30px; }
+body.dev-pc     .mbtn { font-size: 1.9rem; padding: 18px 44px; }
+body.dev-phone  .ttitle { font-size: 1rem; }
+body.dev-tablet .ttitle { font-size: 1.8rem; }
+body.dev-pc     .ttitle { font-size: 2.4rem; }
+body.dev-phone  .mtitle { font-size: 1.8rem; }
+body.dev-tablet .mtitle { font-size: 3.8rem; }
+body.dev-pc     .mtitle { font-size: 5rem; }
+body.dev-phone  .stitle { font-size: 1.3rem; }
+body.dev-tablet .stitle { font-size: 2.8rem; }
+body.dev-pc     .stitle { font-size: 4rem; }
+body.dev-phone  .q-text { font-size: .85rem; }
+body.dev-phone  .hcard { padding: 14px 16px; max-width: 340px; }
+body.dev-phone  .tbox  { padding: 10px 14px; max-width: 340px; }
+body.dev-phone  .card  { padding: 14px 16px; max-width: 340px; }
+body.dev-phone  .pg    { padding: 30px 10px 120px; }
+body.dev-phone  .choices { grid-template-columns: 1fr 1fr; gap: 7px; }
+body.dev-phone  #pgHome > div, body.dev-phone  #pgHome > div[style] { max-width: 340px !important; width: 96% !important; }
+body.dev-tablet .q-text { font-size: 1.4rem; }
+body.dev-pc     .q-text { font-size: 1.7rem; }
+
+.test-sel-btn{
+  background:linear-gradient(135deg,#1565c0,#42a5f5);
+  color:#fff;border:none;border-radius:16px;padding:18px 12px;
+  font-family:'Scheherazade New',serif;font-size:1.3rem;font-weight:700;
+  cursor:pointer;text-align:center;line-height:1.6;
+  box-shadow:0 4px 16px rgba(21,101,192,.35);
+  transition:transform .2s,box-shadow .2s;
+}
+.test-sel-btn:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 8px 22px rgba(21,101,192,.45)}
+
+@keyframes star-float {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+}
+@keyframes score-pop {
+  0%   { transform: scale(0); opacity: 0; }
+  70%  { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+#soloWinOverlay > div:nth-child(3) { animation: score-pop .6s ease forwards; }
+</style>
+</head>
+<body>
+<div id="sparkles"></div>
+<div class="sun"><div class="rays" id="rays"></div></div>
+<div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
+<div class="birds"><div class="bird b1"></div><div class="bird b2"></div><div class="bird b3"></div><div class="bird b4"></div></div>
+<div class="rainbow"></div>
+<div class="ground"></div>
+<div id="grass"></div>
+<div class="flower" style="bottom:100px;left:7%">&#x1F338;</div>
+<div class="flower" style="bottom:105px;left:14%;animation-delay:.5s">&#x1F33C;</div>
+<div class="flower" style="bottom:100px;left:21%;animation-delay:1s">&#x1F33A;</div>
+<div class="flower" style="bottom:108px;right:9%;animation-delay:.3s">&#x1F338;</div>
+<div class="flower" style="bottom:103px;right:17%;animation-delay:.8s">&#x1F33B;</div>
+<div class="flower" style="bottom:106px;right:25%;animation-delay:1.2s">&#x1F33C;</div>
+<div id="toast"></div>
+
+<!-- HOME -->
+<div class="pg on" id="pgHome">
+    <div class="hcard">
+    <h1 class="mtitle">حلة الازمنة</h1>
+    <div class="dvdr"></div>
+    <p class="stitle">Medo Farfosh</p>
+    <p style="font-family:'Scheherazade New',serif;font-size:.9rem;color:rgba(10,56,112,0.35);margin-top:8px;letter-spacing:2px">© Made by Ahmed Esmail</p>
+  </div>
+    <div style="font-family:'Scheherazade New',serif;font-size:1.6rem;font-weight:700;color:#fff;text-shadow:0 2px 8px rgba(0,60,180,.3);margin-bottom:18px;text-align:center">اختر الزمن</div>
+  <div style="display:flex;flex-direction:column;gap:12px;max-width:520px;width:92%;padding-bottom:20px">
+    <div class="tbox" style="margin-bottom:0;cursor:pointer" id="topicPresentSimple">
+      <div class="ttitle" style="margin-bottom:0">📙 Present Simple — المضارع البسيط</div>
+    </div>
+    <div class="tbox" style="margin-bottom:0;cursor:pointer" id="topicPastSimple">
+      <div class="ttitle" style="margin-bottom:0">📘 Past Simple — الماضي البسيط</div>
+    </div>
+    <div class="tbox" style="margin-bottom:0;cursor:pointer" id="topicFutureSimple">
+      <div class="ttitle" style="margin-bottom:0">📒 Future Simple — المستقبل البسيط</div>
+    </div>
+    <div class="tbox" style="margin-bottom:0;cursor:pointer" id="topicPresentContinuous">
+      <div class="ttitle" style="margin-bottom:0">📕 Present Continuous — المضارع المستمر</div>
+    </div>
+    <div class="tbox" style="margin-bottom:0;cursor:pointer" id="topicPastContinuous">
+      <div class="ttitle" style="margin-bottom:0">📓 Past Continuous — الماضي المستمر</div>
+    </div>
+    <div class="tbox" style="margin-bottom:0;cursor:pointer" id="topicPresentPerfect">
+      <div class="ttitle" style="margin-bottom:0">📗 Present Perfect — المضارع التام</div>
+    </div>
+  </div>
+</div>
+
+<!-- MODE SELECTION -->
+<div class="pg" id="pgMode">
+    <div class="hcard" style="margin-bottom:24px">
+    <h1 class="mtitle" id="modeTitle" style="font-size:2.8rem"></h1>
+  </div>
+  <div class="tbox">
+    <div class="mbtns">
+      <button class="mbtn solo-btn" id="soloBtn">👤 شخص واحد</button>
+      <button class="mbtn z-btn" id="zombieBtn">🧟 لعبة الزومبي</button>
+    </div>
+    <div style="margin-top:14px">
+      <button class="nbtn nb-gray" id="modeBack" style="width:100%">← رجوع</button>
+    </div>
+  </div>
+</div>
+
+<!-- SOLO WIN OVERLAY -->
+<div id="soloWinOverlay" style="position:fixed;inset:0;z-index:9990;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px">
+  <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0d47a1,#1565c0,#1976d2,#42a5f5);opacity:.97;z-index:-1"></div>
+  <!-- Stars BG -->
+  <div id="winStars" style="position:absolute;inset:0;overflow:hidden;z-index:-1"></div>
+  <!-- Content -->
+  <div style="font-size:4rem;margin-bottom:10px" id="winEmoji">🏆</div>
+  <div style="font-family:'Scheherazade New',serif;font-size:2.8rem;font-weight:700;color:#fff;margin-bottom:8px" id="winRating"></div>
+  <div style="font-family:'Scheherazade New',serif;font-size:1.6rem;color:rgba(255,255,255,.85);margin-bottom:24px" id="winScore"></div>
+  <div style="background:rgba(255,255,255,.15);border-radius:20px;padding:16px 40px;margin-bottom:32px;border:2px solid rgba(255,255,255,.3)">
+    <div style="font-family:'Amiri',serif;font-size:5rem;font-weight:700;color:#ffd700;line-height:1" id="winPercent"></div>
+    <div style="font-family:'Amiri',serif;font-size:1.2rem;color:rgba(255,255,255,.8);margin-top:4px">الدرجة</div>
+  </div>
+  <button id="winClose" style="background:linear-gradient(135deg,#fff,#e3f2fd);color:#0d47a1;border:none;border-radius:16px;padding:14px 44px;font-family:'Scheherazade New',serif;font-size:1.4rem;font-weight:700;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.25);transition:transform .2s">
+    🔄 اختبار جديد
+  </button>
+</div>
+
+<!-- DEVICE MODAL -->
+<div id="deviceOverlay" style="position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:9999;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)">
+  <div style="background:linear-gradient(135deg,rgba(255,255,255,.97),rgba(224,242,255,.95));border-radius:24px;padding:36px 40px;max-width:420px;width:88%;box-shadow:0 24px 60px rgba(0,0,0,.35);text-align:center;animation:fadeIn .4s ease">
+    <div style="font-size:2.4rem;margin-bottom:6px">🖥️</div>
+    <div style="font-family:'Scheherazade New',serif;font-size:1.9rem;font-weight:700;color:#0a3870;margin-bottom:6px">اختر جهازك</div>
+    <div style="font-family:'Amiri',serif;font-size:1rem;color:#555;margin-bottom:22px">لضبط حجم الأزرار والخط</div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <button id="devPhone" style="padding:16px;font-size:1.35rem;background:linear-gradient(135deg,#1565c0,#42a5f5);color:#fff;border-radius:14px;border:none;cursor:pointer;box-shadow:0 4px 16px rgba(21,101,192,.4);font-family:'Scheherazade New',serif;font-weight:700;transition:transform .15s">📱 تليفون</button>
+      <button id="devPC" style="padding:16px;font-size:1.35rem;background:linear-gradient(135deg,#1b5e20,#43a047);color:#fff;border-radius:14px;border:none;cursor:pointer;box-shadow:0 4px 16px rgba(27,94,32,.4);font-family:'Scheherazade New',serif;font-weight:700;transition:transform .15s">💻 لاب توب / تابلت</button>
+    </div>
+  </div>
+</div>
+
+<!-- SETTINGS BUTTON (fixed) -->
+<button id="settingsBtn" style="position:fixed;top:14px;left:14px;z-index:8888;background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.5);border-radius:50%;width:46px;height:46px;font-size:1.4rem;cursor:pointer;backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;transition:transform .2s,background .2s" title="الإعدادات">⚙️</button>
+
+<!-- SETTINGS MODAL -->
+<div id="settingsOverlay" style="position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9998;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px)">
+  <div style="background:linear-gradient(135deg,rgba(255,255,255,.97),rgba(224,242,255,.95));border-radius:24px;padding:32px 36px;max-width:400px;width:88%;box-shadow:0 24px 60px rgba(0,0,0,.3);text-align:center">
+    <div style="font-size:2rem;margin-bottom:4px">⚙️</div>
+    <div style="font-family:'Scheherazade New',serif;font-size:1.8rem;font-weight:700;color:#0a3870;margin-bottom:20px">الإعدادات</div>
+    <div style="font-family:'Amiri',serif;font-size:1rem;color:#555;margin-bottom:14px;text-align:right">حجم الشاشة:</div>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px">
+      <button id="setPhone" style="padding:13px;font-size:1.2rem;background:linear-gradient(135deg,#1565c0,#42a5f5);color:#fff;border-radius:12px;border:none;cursor:pointer;font-family:'Scheherazade New',serif;font-weight:700">📱 تليفون</button>
+      <button id="setPC" style="padding:13px;font-size:1.2rem;background:linear-gradient(135deg,#1b5e20,#43a047);color:#fff;border-radius:12px;border:none;cursor:pointer;font-family:'Scheherazade New',serif;font-weight:700">💻 لاب توب / تابلت</button>
+    </div>
+    <div style="font-family:'Amiri',serif;font-size:1rem;color:#555;margin-bottom:10px;text-align:right">🔊 مستوى الصوت:</div>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
+      <span style="font-size:1.2rem" id="volIcon">🔊</span>
+      <div style="flex:1">
+        <input id="volSlider" type="range" min="0" max="100" value="70" step="10" list="volSteps"
+          style="width:100%;height:6px;border-radius:4px;accent-color:#1565c0;cursor:pointer">
+
+
+      </div>
+      <span id="volVal" style="font-family:'Scheherazade New',serif;font-size:1rem;color:#0a3870;min-width:36px">70%</span>
+    </div>
+    <button id="settingsClose" style="padding:10px 30px;font-size:1.1rem;background:linear-gradient(135deg,#546e7a,#90a4ae);color:#fff;border-radius:12px;border:none;cursor:pointer;font-family:'Scheherazade New',serif;font-weight:700">إغلاق ✕</button>
+  </div>
+</div>
+
+<!-- SOLO -->
+<div class="pg" id="pgTestSelect">
+  <div class="card" style="max-width:520px">
+    <div style="font-family:'Scheherazade New',serif;font-size:1.7rem;font-weight:700;color:#0a3870;text-align:center;margin-bottom:20px">📝 اختر الاختبار</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px">
+      <button class="test-sel-btn" id="testBtn1">📄 Test 1<br><span style="font-size:.85rem;opacity:.75">Q 1 – 12</span></button>
+      <button class="test-sel-btn" id="testBtn2">📄 Test 2<br><span style="font-size:.85rem;opacity:.75">Q 13 – 24</span></button>
+      <button class="test-sel-btn" id="testBtn3">📄 Test 3<br><span style="font-size:.85rem;opacity:.75">Q 25 – 36</span></button>
+      <button class="test-sel-btn" id="testBtn4">📄 Test 4<br><span style="font-size:.85rem;opacity:.75">Q 37 – 48</span></button>
+    </div>
+    <div class="brow"><button class="nbtn nb-gray" id="testSelectBack">← رجوع</button></div>
+  </div>
+</div>
+
+<div class="pg" id="pgSolo">
+  <div class="card">
+    <div class="qlbl" id="soloLbl">&#x633;&#x624;&#x627;&#x644; 1</div>
+    <div class="qtxt" id="soloQTxt"></div>
+    <div class="cgrid" id="soloChoices"></div>
+    <div class="rmsg" id="soloMsg"></div>
+    <div class="brow">
+      <button class="nbtn nb-blue" id="soloNext" style="display:none">&#x627;&#x644;&#x62A;&#x627;&#x644;&#x64A; &#x2190;</button>
+      <button class="nbtn nb-gray" id="soloBack">&#x2190; &#x631;&#x62C;&#x648;&#x639;</button>
+    </div>
+    <div id="soloScore" style="text-align:center;margin-top:10px;font-family:Amiri,serif;font-size:1.1rem;color:#1a5a9e"></div>
+  </div>
+</div>
+
+<!-- ZOMBIE NAMES -->
+<div class="pg" id="pgNames">
+  <div class="card">
+    <div class="qlbl" style="display:block;margin-bottom:16px">&#x1F9DF; &#x623;&#x62F;&#x62E;&#x644; &#x623;&#x633;&#x645;&#x627;&#x621; &#x627;&#x644;&#x644;&#x627;&#x639;&#x628;&#x64A;&#x646;</div>
+    <div id="namesDiv">
+      <div class="nrow"><span class="nnum">1</span><input class="ninp" id="p1" placeholder="&#x627;&#x633;&#x645; &#x627;&#x644;&#x644;&#x627;&#x639;&#x628; &#x627;&#x644;&#x623;&#x648;&#x644;"></div>
+      <div class="nrow"><span class="nnum">2</span><input class="ninp" id="p2" placeholder="&#x627;&#x633;&#x645; &#x627;&#x644;&#x644;&#x627;&#x639;&#x628; &#x627;&#x644;&#x62B;&#x627;&#x646;&#x64A;"></div>
+      <div class="nrow"><span class="nnum">3</span><input class="ninp" id="p3" placeholder="&#x627;&#x644;&#x644;&#x627;&#x639;&#x628; &#x627;&#x644;&#x62B;&#x627;&#x644;&#x62B; (&#x627;&#x62E;&#x62A;&#x64A;&#x627;&#x631;&#x64A;)"></div>
+      <div class="nrow"><span class="nnum">4</span><input class="ninp" id="p4" placeholder="&#x627;&#x644;&#x644;&#x627;&#x639;&#x628; &#x627;&#x644;&#x631;&#x627;&#x628;&#x639; (&#x627;&#x62E;&#x62A;&#x64A;&#x627;&#x631;&#x64A;)"></div>
+      <div class="nrow"><span class="nnum">5</span><input class="ninp" id="p5" placeholder="&#x627;&#x644;&#x644;&#x627;&#x639;&#x628; &#x627;&#x644;&#x62E;&#x627;&#x645;&#x633; (&#x627;&#x62E;&#x62A;&#x64A;&#x627;&#x631;&#x64A;)"></div>
+    </div>
+    <div class="notice">10 نقاط لكل إجابة صح | 🛡️ درع 20 | 🧟 تحويل زومبي 30 | 💸 سرقة كل الفلوس 70 | 💀 الحاجة السرية 200</div>
+    <div class="brow">
+      <button class="nbtn nb-red" id="startBtn">&#x627;&#x628;&#x62F;&#x623; &#x1F9DF;</button>
+      <button class="nbtn nb-gray" id="namesBack">&#x2190; &#x631;&#x62C;&#x648;&#x639;</button>
+    </div>
+    <div id="nameErr" style="color:#c62828;text-align:center;font-family:Amiri,serif;font-size:1rem;margin-top:8px;display:none">&#x26A0;&#xFE0F; &#x623;&#x62F;&#x62E;&#x644; &#x627;&#x633;&#x645;&#x64A;&#x646; &#x639;&#x644;&#x649; &#x627;&#x644;&#x623;&#x642;&#x644;!</div>
+  </div>
+</div>
+
+<!-- ZOMBIE GAME -->
+<div class="pg" id="pgGame">
+  <div class="card" id="gameCard">
+    <div class="sb" id="sb"></div>
+    <div class="thdr" id="thdr"></div>
+    <div id="areaQ" style="display:none">
+      <div class="qlbl" id="gQlbl"></div>
+      <div class="qtxt" id="gQtxt"></div>
+      <div class="cgrid" id="gChoices"></div>
+      <div class="rmsg" id="gQmsg"></div>
+      <div class="brow"><button class="nbtn nb-blue" id="gQnext" style="display:none">&#x627;&#x644;&#x62A;&#x627;&#x644;&#x64A; &#x2190;</button></div>
+    </div>
+    <div id="areaShop" style="display:none">
+      <div style="font-family:'Scheherazade New',serif;font-size:1.35rem;font-weight:700;color:#0a3870;text-align:center;margin-bottom:12px">&#x1F6D2; &#x627;&#x644;&#x634;&#x648;&#x628;</div>
+      <div class="sgrid" id="shopGrid"></div>
+      <div id="shopTgtDiv" style="display:none;margin-top:14px">
+        <div id="shopTgtTitle" style="font-family:'Scheherazade New',serif;font-size:1.2rem;color:#0a3060;text-align:center;margin-bottom:8px"></div>
+        <div class="tgts" id="shopTgtList"></div>
+        <div class="brow"><button class="nbtn nb-gray" id="cancelTgt">&#x625;&#x644;&#x63A;&#x627;&#x621;</button></div>
+      </div>
+      <div class="rmsg" id="shopMsg" style="margin-top:10px"></div>
+      <div class="brow" style="margin-top:14px"><button class="nbtn nb-blue" id="shopDone">&#x627;&#x646;&#x647;&#x650; &#x62F;&#x648;&#x631;&#x643; &#x2190;</button></div>
+    </div>
+    <div id="areaZChoice" style="display:none">
+      <div style="font-family:'Scheherazade New',serif;font-size:1.4rem;color:#7f0000;text-align:center;margin-bottom:16px">&#x623;&#x646;&#x62A; &#x632;&#x648;&#x645;&#x628;&#x64A; &#x1F9DF; &#x2014; &#x627;&#x62E;&#x62A;&#x627;&#x631;</div>
+      <div class="brow">
+        <button class="nbtn nb-gray" id="zPassBtn">&#x62A;&#x639;&#x62F;&#x64A;&#x629; &#x27A1;&#xFE0F;</button>
+        <button class="nbtn nb-orange" id="zFreeBtn">&#x645;&#x62D;&#x627;&#x648;&#x644;&#x629; &#x627;&#x644;&#x62A;&#x62D;&#x631;&#x631; &#x26D3;&#xFE0F;</button>
+      </div>
+    </div>
+    <div id="areaFree" style="display:none">
+      <div class="fc" id="freeCount">&#x633;&#x624;&#x627;&#x644; 1 &#x645;&#x646; 3</div>
+      <div class="qtxt" id="freeQtxt"></div>
+      <div class="cgrid" id="freeChoices"></div>
+      <div class="rmsg" id="freeMsg"></div>
+      <div class="brow"><button class="nbtn nb-green" id="freeNext" style="display:none">&#x627;&#x644;&#x62A;&#x627;&#x644;&#x64A;</button></div>
+    </div>
+    <div style="display:flex;gap:12px;justify-content:center;margin-top:20px;padding-top:16px;border-top:1px solid rgba(33,150,243,.2)">
+      <button class="nbtn nb-red" id="replayBtn">🔄 رسترة</button>
+      <button class="nbtn nb-gray" id="homeBtn">🏠 انهاء</button>
+    </div>
+    <div id="areaEnd" style="display:none;text-align:center;padding:20px">
+      <div style="font-size:3.5rem;margin-bottom:10px">&#x1F3C6;</div>
+      <div id="endMsg" style="font-family:'Scheherazade New',serif;font-size:1.8rem;font-weight:700;color:#1b5e20;margin-bottom:6px"></div>
+      <div id="endRanks" style="font-family:Amiri,serif;font-size:1.1rem;color:#333;margin-top:10px"></div>
+
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!-- LEADERBOARD -->
+<div class="pg" id="pgLeader">
+  <div class="card" style="max-width:600px">
+    <div style="text-align:center;font-size:3rem;margin-bottom:6px">🏆</div>
+    <div style="font-family:'Scheherazade New',serif;font-size:2rem;font-weight:700;color:#0a3870;text-align:center;margin-bottom:20px">قائمة الكاسبين</div>
+    <div id="leaderList"></div>
+    <div class="brow" style="margin-top:22px;justify-content:center">
+      <button class="nbtn nb-gray" id="leaderHomeBtn">🏠 الرئيسية</button>
+      <button class="nbtn nb-red" id="leaderReplayBtn">🔄 العب مجدداً</button>
+    </div>
+  </div>
+</div>
+
+<script>
+var TOPICS={
+  "present_simple":{
+    label:"📙 Present Simple — المضارع البسيط",
+    questions:[]
+  },
+  "past_simple":{
+    label:"📘 Past Simple",
+    questions:[
+  {t:"Nour and Zienb ____ to the park with my friends yesterday.",c:["a) go","b) went","c) goes","d) going"],a:"b) went",e:"went = ماضي go",r:"yesterday تستدعي Past Simple"},
+  {t:"Faten ____ her favorite book last night.",c:["a) read","b) reads","c) reading","d) is reading"],a:"a) read",e:"read = ماضي read",r:"last night تستدعي Past Simple"},
+  {t:"They ____ a cake for their mom's birthday.",c:["a) bake","b) was baked","c) bakes","d) baked"],a:"d) baked",e:"baked = ماضي bake",r:"الفعل المنتظم يأخذ ed في الماضي"},
+  {t:"He ____ his bike to school yesterday.",c:["a) ride","b) is riding","c) rides","d) rode"],a:"d) rode",e:"rode = ماضي ride",r:"ride فعل شاذ ماضيه rode"},
+  {t:"We ____ on a picnic in the park last weekend.",c:["a) go","b) went","c) gone","d) is going"],a:"b) went",e:"went = ماضي go",r:"last weekend = الماضي — gone تصريف ثالث"},
+  {t:"They ____ a party for their friend's graduation.",c:["a) have","b) had","c) has","d) is having"],a:"b) had",e:"had = ماضي have",r:"have فعل شاذ ماضيه had"},
+  {t:"Mazen ____ his lunch at school.",c:["a) eat","b) ate","c) eating","d) are eating"],a:"b) ate",e:"ate = ماضي eat",r:"eat فعل شاذ ماضيه ate"},
+  {t:"We ____ a lot of pictures on our last vacation.",c:["a) take","b) took","c) takes","d) are taking"],a:"b) took",e:"took = ماضي take",r:"take فعل شاذ ماضيه took"},
+  {t:"What ____ you do yesterday?",c:["a) do","b) did","c) does","d) were done"],a:"b) did",e:"did = ماضي do",r:"في أسئلة الماضي did كفعل مساعد"},
+  {t:"Ahmed ____ her hair at the barbershop yesterday.",c:["a) cut","b) cuts","c) cutting","d) is cutting"],a:"a) cut",e:"cut = ماضي cut",r:"cut فعل شاذ — الماضي والمضارع نفس الشكل"},
+  {t:"They ____ a new car last month.",c:["a) buy","b) bought","c) buying","d) is buying"],a:"b) bought",e:"bought = ماضي buy",r:"buy فعل شاذ ماضيه bought"},
+  {t:"He ____ his keys in the car last night.",c:["a) leave","b) left","c) leaves","d) leaving"],a:"b) left",e:"left = ماضي leave",r:"leave فعل شاذ ماضيه left"},
+  {t:"We ____ a long walk in the park yesterday.",c:["a) take","b) takes","c) took","d) taking"],a:"c) took",e:"took = ماضي take",r:"yesterday تستدعي Past Simple"},
+  {t:"She ____ her favorite TV show last night.",c:["a) watch","b) watched","c) watches","d) watching"],a:"b) watched",e:"watched = ماضي watch",r:"الفعل المنتظم يأخذ ed في الماضي"},
+  {t:"They ____ a birthday party for their friend.",c:["a) have","b) having","c) has","d) had"],a:"d) had",e:"had = ماضي have",r:"have فعل شاذ ماضيه had"},
+  {t:"He ____ his jacket at home.",c:["a) leave","b) left","c) leaves","d) leaving"],a:"b) left",e:"left = ماضي leave",r:"leave فعل شاذ ماضيه left"},
+  {t:"We ____ a lot of souvenirs on our vacation.",c:["a) buy","b) buying","c) buys","d) bought"],a:"d) bought",e:"bought = ماضي buy",r:"buy فعل شاذ ماضيه bought"},
+  {t:"She ____ her friend at the library.",c:["a) meet","b) meeting","c) meets","d) met"],a:"d) met",e:"met = ماضي meet",r:"meet فعل شاذ ماضيه met"},
+  {t:"They ____ a picnic in the park.",c:["a) have","b) had","c) has","d) having"],a:"b) had",e:"had = ماضي have",r:"have فعل شاذ ماضيه had"},
+  {t:"He ____ his homework after dinner.",c:["a) do","b) did","c) does","d) doing"],a:"b) did",e:"did = ماضي do",r:"do فعل شاذ ماضيه did"},
+  {t:"We ____ a great time at the beach.",c:["a) have","b) had","c) has","d) having"],a:"b) had",e:"had = ماضي have",r:"have فعل شاذ ماضيه had"},
+  {t:"She ____ her favorite song on the radio.",c:["a) hear","b) are heard","c) hears","d) heard"],a:"d) heard",e:"heard = ماضي hear",r:"hear فعل شاذ ماضيه heard"},
+  {t:"They ____ a new house last month.",c:["a) buy","b) bought","c) buys","d) are buying"],a:"b) bought",e:"bought = ماضي buy",r:"buy فعل شاذ ماضيه bought"},
+  {t:"I ____ eat breakfast yesterday.",c:["a) don't","b) didn't","c) wasn't","d) weren't"],a:"b) didn't",e:"didn't = النفي في Past Simple",r:"Past Simple المنفي: didn't + فعل مضارع"},
+  {t:"My friend and I didn't ____ to the park to play basketball.",c:["a) goes","b) going","c) went","d) go"],a:"d) go",e:"go = المصدر بعد didn't",r:"بعد didn't نستخدم المصدر بدون to"},
+  {t:"Sayed and Samy ____ swim in the pool last summer.",c:["a) didn't","b) doesn't","c) wasn't","d) weren't"],a:"a) didn't",e:"didn't = النفي في الماضي مع الجمع",r:"النفي في Past Simple دائماً didn't"},
+  {t:"I did not ____ hide and seek with my friends yesterday.",c:["a) play","b) played","c) playing","d) plays"],a:"a) play",e:"play = المصدر بعد did not",r:"بعد did not نستخدم المصدر"},
+  {t:"They ____ happy at the party yesterday.",c:["a) didn't","b) isn't","c) wasn't","d) weren't"],a:"d) weren't",e:"weren't = نفي to be للجمع في الماضي",r:"happy صفة — نستخدم were not مع الجمع"},
+  {t:"He ____ ride my bike yesterday.",c:["a) don't","b) doesn't","c) wasn't","d) didn't"],a:"d) didn't",e:"didn't = النفي في Past Simple",r:"النفي في Past Simple مع المفرد: didn't"},
+  {t:"Shady and Faten ____ ready to concert 3 hours ago.",c:["a) didn't","b) isn't","c) wasn't","d) weren't"],a:"d) weren't",e:"weren't = نفي to be للجمع في الماضي",r:"ready صفة — نستخدم were not مع الجمع"},
+  {t:"Nour ____ watch TV last night.",c:["a) didn't","b) isn't","c) wasn't","d) weren't"],a:"a) didn't",e:"didn't = النفي مع فعل في الماضي",r:"نفي Past Simple مع فعل: didn't"},
+  {t:"We didn't ____ a picnic in the park.",c:["a) have","b) had","c) having","d) is having"],a:"a) have",e:"have = المصدر بعد didn't",r:"بعد didn't نستخدم المصدر"},
+  {t:"You didn't ____ your homework yesterday.",c:["a) do","b) did","c) doing","d) were doing"],a:"a) do",e:"do = المصدر بعد didn't",r:"بعد didn't نستخدم المصدر"},
+  {t:"Ahmed ____ play with his toys last week.",c:["a) don't","b) doesn't","c) didn't","d) weren't"],a:"c) didn't",e:"didn't = النفي في Past Simple",r:"last week تستدعي Past Simple المنفي"},
+  {t:"I ____ see a butterfly in the garden yesterday.",c:["a) don't","b) doesn't","c) wasn't","d) didn't"],a:"d) didn't",e:"didn't = النفي في Past Simple",r:"yesterday تستدعي Past Simple المنفي"},
+  {t:"What did you ____ yesterday?",c:["a) do","b) did","c) done","d) doing"],a:"a) do",e:"do = المصدر بعد did",r:"بعد did في الأسئلة نستخدم المصدر"},
+  {t:"Where did you ____ last weekend?",c:["a) went","b) goes","c) going","d) go"],a:"d) go",e:"go = المصدر بعد did",r:"بعد did في الأسئلة نستخدم المصدر"},
+  {t:"____ you see the movie last night?",c:["a) Do","b) Does","c) Did","d) Were"],a:"c) Did",e:"Did = أداة السؤال في Past Simple",r:"أسئلة Past Simple تبدأ بـ Did"},
+  {t:"What did you ____ for breakfast this morning?",c:["a) eat","b) ate","c) eating","d) eats"],a:"a) eat",e:"eat = المصدر بعد did",r:"بعد did في الأسئلة نستخدم المصدر"},
+  {t:"When did you finish your homework? I ____ it 3 hours ago.",c:["a) finish","b) finished","c) finishes","d) was finished"],a:"b) finished",e:"finished = Past Simple من finish",r:"الإجابة في Past Simple"},
+  {t:"Did you go to the park yesterday? No, I ____.",c:["a) didn't","b) doesn't","c) wasn't","d) weren't"],a:"a) didn't",e:"didn't = النفي المختصر في الماضي",r:"الإجابة المنفية القصيرة: No, I didn't"},
+  {t:"Did Samy ____ Luxor?",c:["a) visited","b) visiting","c) visits","d) visit"],a:"d) visit",e:"visit = المصدر بعد Did",r:"بعد Did في الأسئلة نستخدم المصدر"},
+  {t:"Were you hungry 2 hours ago? Yes, I ____.",c:["a) was","b) did","c) were","d) driven"],a:"a) was",e:"was = الإجابة المثبتة مع المفرد",r:"Yes, I was — الإجابة القصيرة مع were"},
+  {t:"Did the cat chase the mouse? Yes, it ____.",c:["a) does","b) doesn't","c) did","d) weren't"],a:"c) did",e:"did = الإجابة المثبتة في الماضي",r:"Yes, it did — الإجابة القصيرة في Past Simple"},
+  {t:"Did the bird ____ away? Yes, it flew away.",c:["a) fly","b) flies","c) flew","d) flown"],a:"a) fly",e:"fly = المصدر بعد Did",r:"بعد Did في الأسئلة نستخدم المصدر"},
+  {t:"____ you happy yesterday?",c:["a) Do","b) Was","c) Did","d) Were"],a:"d) Were",e:"Were = السؤال مع الجمع أو المفرد (you) في الماضي",r:"happy صفة — السؤال يكون بـ Were"},
+  {t:"____ Ahmed late for school last week?",c:["a) Were","b) Was","c) Did","d) Has"],a:"b) Was",e:"Was = السؤال مع المفرد في الماضي",r:"Ahmed مفرد — السؤال يكون بـ Was"},
+  {t:"____ you eat pizza last night?",c:["a) Do","b) Did","c) Done","d) Doing"],a:"b) Did",e:"Did = أداة السؤال في Past Simple",r:"أسئلة Past Simple تبدأ بـ Did"},
+  {t:"How did Ali ____ last weekend?",c:["a) travel","b) travelled","c) travels","d) travelling"],a:"a) travel",e:"travel = المصدر بعد did",r:"بعد did في الأسئلة نستخدم المصدر"},
+  {t:"When ____ you last night? I was home.",c:["a) was","b) does","c) did","d) were"],a:"c) did",e:"did = أداة السؤال في الماضي البسيط",r:"When + did + subject + verb?"},
+  {t:"When did you ____ up? I got up at 7:00.",c:["a) get","b) got","c) gets","d) getting"],a:"a) get",e:"get = المصدر بعد did",r:"بعد did نستخدم المصدر"},
+  {t:"Who ____ the match yesterday?",c:["a) win","b) wins","c) won","d) winning"],a:"c) won",e:"won = ماضي win",r:"win فعل شاذ ماضيه won"},
+  {t:"How ____ Rana travel to Alexandria yesterday?",c:["a) did","b) done","c) doing","d) does"],a:"a) did",e:"did = أداة السؤال في الماضي البسيط",r:"How + did + subject + verb?"},
+  {t:"What did you ____ for lunch yesterday?",c:["a) have","b) has","c) having","d) had"],a:"d) had",e:"had = ماضي have",r:"have فعل شاذ ماضيه had"},
+  {t:"Did you ____ your bike yesterday?",c:["a) rode","b) ridden","c) ridding","d) ride"],a:"d) ride",e:"ride = المصدر بعد did",r:"بعد did في الأسئلة نستخدم المصدر"},
+  {t:"Did you ____ swimming last weekend?",c:["a) go","b) goes","c) going","d) went"],a:"a) go",e:"go = المصدر بعد did",r:"بعد did نستخدم المصدر"},
+  {t:"Which color ____ your favorite? I liked red a lot.",c:["a) do","b) was","c) did","d) were"],a:"b) was",e:"was = الماضي البسيط من is مع المفرد",r:"color مفرد → was في الماضي"},
+  {t:"What did you do after school yesterday? I ____ my grandma.",c:["a) visited","b) visit","c) visits","d) visiting"],a:"a) visited",e:"visited = ماضي visit",r:"visit فعل منتظم ماضيه visited"}
+]
+  },
+  "future_simple":{
+    label:"📒 Future Simple — المستقبل البسيط",
+    questions:[
+  {t:"The flight leaves at 6 AM, so we ____ to the airport early.",c:["a) will","b) are going to","c) is going to","d) shouldn't"],a:"b) are going to",e:"are going to = خطة مقررة مسبقاً",r:"are going to للأحداث المخططة مسبقاً"},
+  {t:"The chef is preparing a special dish for us tonight. It ____ be delicious!",c:["a) is","b) will","c) are going to","d) is going to"],a:"b) will",e:"will = توقع في المستقبل",r:"will للتوقعات والتنبؤات"},
+  {t:"The cake is ready. I ____ serve it after dinner.",c:["a) don't","b) will","c) am going","d) is going to"],a:"b) will",e:"will = قرار لحظي",r:"will للقرارات اللحظية"},
+  {t:"The fridge is almost empty. We ____ go to the store later.",c:["a) are going to","b) don't","c) are","d) won't"],a:"a) are going to",e:"are going to = خطة مقررة",r:"are going to للخطط المسبقة"},
+  {t:"The train leaves in 10 minutes. I ____ miss it if I don't hurry.",c:["a) won't","b) will","c) am","d) going to"],a:"a) won't",e:"won't = نفي will في المستقبل",r:"won't = will not — نفي المستقبل"},
+  {t:"The laundry basket is full. I ____ do the laundry this evening.",c:["a) are going to","b) is going to","c) will","d) am going to"],a:"c) will",e:"will = قرار لحظي",r:"will للقرارات اللحظية"},
+  {t:"The store is closed now, so they ____ have to come back tomorrow.",c:["a) need","b) will","c) are going","d) going to"],a:"b) will",e:"will = نتيجة متوقعة",r:"will للنتائج المتوقعة"},
+  {t:"The competition is challenging, but I ____ finish it.",c:["a) won't","b) will","c) am going","d) are going to"],a:"b) will",e:"will = وعد أو عزم",r:"will للوعود والعزم"},
+  {t:"The phone battery is low. I ____ charge it before going out.",c:["a) will need","b) am going to","c) is going to","d) won't"],a:"b) am going to",e:"am going to = نية مسبقة",r:"am going to للنوايا المسبقة"},
+  {t:"The grocery list is ready. We ____ buy groceries after work.",c:["a) will","b) are going to","c) am going to","d) won't"],a:"b) are going to",e:"are going to = خطة جاهزة",r:"are going to للخطط المسبقة"},
+  {t:"It's sunny now, but I think it ____ rain tomorrow.",c:["a) will","b) is going to","c) is","d) should"],a:"a) will",e:"will = توقع مستقبلي",r:"will للتوقعات والتنبؤات"},
+  {t:"The recipe looks simple, and I ____ try cooking it for dinner tonight.",c:["a) will","b) am","c) is going to","d) am going"],a:"a) will",e:"will = قرار لحظي",r:"will للقرارات اللحظية"},
+  {t:"The sunset is great. It ____ be a beautiful evening.",c:["a) going to","b) won't","c) will","d) don't"],a:"c) will",e:"will = توقع",r:"will للتوقعات"},
+  {t:"The kids are on vacation next week. We ____ plan a family day out.",c:["a) will","b) are going to","c) is going to","d) won't"],a:"b) are going to",e:"are going to = خطة مسبقة",r:"are going to للخطط المسبقة"},
+  {t:"The restaurant is famous for its desserts. I ____ try their special cake.",c:["a) am going","b) will","c) don't","d) doesn't"],a:"b) will",e:"will = قرار لحظي",r:"will للقرارات اللحظية"},
+  {t:"The weather forecast predicts rain. I'm afraid the picnic ____ be canceled.",c:["a) will","b) is going","c) be","d) won't"],a:"a) will",e:"will = توقع بناءً على معلومة",r:"will للتوقعات المبنية على أدلة"},
+  {t:"The car needs an oil change. I ____ take it to the mechanic tomorrow.",c:["a) won't","b) need","c) am going to","d) shouldn't"],a:"c) am going to",e:"am going to = خطة مسبقة",r:"am going to للخطط المسبقة"},
+  {t:"The train is late, but it ____ arrive eventually.",c:["a) is going to","b) won't","c) will","d) doesn't"],a:"c) will",e:"will = توقع",r:"will للتوقعات"},
+  {t:"The birthday party is in two days. We ____ celebrate with a nice cake.",c:["a) are going to","b) don't","c) mustn't","d) need"],a:"a) are going to",e:"are going to = خطة مسبقة",r:"are going to للخطط المسبقة"},
+  {t:"The computer is acting slow. I ____ run a virus scan.",c:["a) am going to","b) is going to","c) will","d) doesn't"],a:"a) am going to",e:"am going to = نية مسبقة",r:"am going to للنوايا"},
+  {t:"The sun is setting, and it ____ get dark soon.",c:["a) won't","b) will","c) is going","d) would"],a:"b) will",e:"will = توقع قريب",r:"will للتوقعات"},
+  {t:"The movie premiere is on Friday. We ____ buy our tickets in advance.",c:["a) is going to","b) are going to","c) will","d) doesn't"],a:"b) are going to",e:"are going to = خطة مقررة",r:"are going to للخطط المسبقة"},
+  {t:"The weather forecast predicts that it ____ rain later in the evening.",c:["a) is going to","b) will","c) don't","d) doesn't"],a:"a) is going to",e:"is going to = توقع ببرهان",r:"is going to للتوقعات المبنية على أدلة"},
+  {t:"The concert tickets are on sale. We ____ buy them before they sell out.",c:["a) will","b) are going to","c) mustn't","d) shouldn't"],a:"b) are going to",e:"are going to = خطة مسبقة",r:"are going to للخطط المسبقة"},
+  {t:"She ____ receive an award for her outstanding contributions to the community.",c:["a) will","b) us","c) going to","d) is going"],a:"a) will",e:"will = توقع مستقبلي",r:"will للتوقعات"},
+  {t:"The party invitations are sent out. We ____ have a fantastic party.",c:["a) will","b) are","c) can't","d) are going to"],a:"d) are going to",e:"are going to = خطة مقررة",r:"are going to للخطط المسبقة"},
+  {t:"Tomorrow, I will ____ up some groceries on my way home from work.",c:["a) pick","b) picks","c) picking","d) picked"],a:"a) pick",e:"pick = المصدر بعد will",r:"will + verb (base form)"},
+  {t:"The car is making strange noises. I ____ take it to the mechanic for a checkup.",c:["a) mustn't","b) will","c) am going to","d) don't"],a:"c) am going to",e:"am going to = خطة ناتجة عن موقف",r:"am going to للخطط الناتجة عن أدلة"},
+  {t:"If it rains, I will ____ an umbrella with me to the park.",c:["a) takes","b) to take","c) take","d) taking"],a:"c) take",e:"take = المصدر بعد will",r:"will + verb (base form)"},
+  {t:"I ____ to call you later to discuss our plans for the weekend.",c:["a) am going","b) is going","c) will","d) will go"],a:"c) will",e:"will = وعد أو نية",r:"will للوعود والنوايا"},
+  {t:"The garden needs some work. I ____ plant new flowers this weekend.",c:["a) will","b) won't","c) am going to","d) is going to"],a:"c) am going to",e:"am going to = خطة مسبقة",r:"am going to للخطط المسبقة"},
+  {t:"If the traffic is not too heavy, I will ____ at the meeting on time.",c:["a) is","b) am","c) be","d) been"],a:"c) be",e:"be = المصدر بعد will",r:"will + verb (base form) → will be"},
+  {t:"The new restaurant has great reviews. We ____ try it for dinner tonight.",c:["a) is going to","b) are going to","c) will","d) shouldn't"],a:"b) are going to",e:"are going to = خطة مسبقة",r:"are going to للخطط المسبقة"},
+  {t:"The laptop battery is draining. I ____ replace it with a new one.",c:["a) is going to","b) mustn't","c) will","d) am going to"],a:"c) will",e:"will = قرار لحظي",r:"will للقرارات اللحظية"},
+  {t:"I will ____ you the letter as soon as I finish writing it.",c:["a) sent","b) sending","c) send","d) sends"],a:"c) send",e:"send = المصدر بعد will",r:"will + verb (base form)"},
+  {t:"If the weather is nice, we ____ have a picnic in the park on Sunday.",c:["a) are going to","b) won't","c) shouldn't","d) will"],a:"d) will",e:"will = نتيجة الشرط",r:"If + present simple, will + verb"},
+  {t:"The garden needs watering. I ____ do it after I finish my coffee.",c:["a) are going to","b) won't","c) am going to","d) shouldn't"],a:"c) am going to",e:"am going to = خطة ناتجة عن موقف",r:"am going to للخطط الناتجة عن أدلة"},
+  {t:"He will fix the leaky faucet in the kitchen ____ weekend.",c:["a) last","b) past","c) next","d) ago"],a:"c) next",e:"next = الأسبوع القادم",r:"next weekend = في عطلة الأسبوع القادم"},
+  {t:"The new fitness app is out. I ____ download it to track my workouts.",c:["a) am going to","b) can't","c) mustn't","d) won't"],a:"a) am going to",e:"am going to = نية ناتجة عن موقف",r:"am going to للنوايا"},
+  {t:"If the movie is good, we will probably ____ and watch the sequel.",c:["a) stays","b) stay","c) staying","d) stayed"],a:"b) stay",e:"stay = المصدر بعد will",r:"will + verb (base form)"},
+  {t:"She ____ meet her friends for coffee at the usual cafe on Saturday.",c:["a) is","b) will","c) doesn't","d) don't"],a:"b) will",e:"will = خطة مستقبلية",r:"will للخطط المستقبلية"},
+  {t:"The coffee machine is not working well. I ____ call the technician to fix it.",c:["a) will","b) is going to","c) am going to","d) am"],a:"c) am going to",e:"am going to = خطة ناتجة عن موقف",r:"am going to للخطط الناتجة عن أدلة"},
+  {t:"Tomorrow, I will ____ a new book that I've been looking forward to reading.",c:["a) reading","b) reads","c) read","d) is reading"],a:"c) read",e:"read = المصدر بعد will",r:"will + verb (base form)"},
+  {t:"Before the party, I will ____ the house with balloons and streamers.",c:["a) decorating","b) decorated","c) decorate","d) decorates"],a:"c) decorate",e:"decorate = المصدر بعد will",r:"will + verb (base form)"},
+  {t:"She will ____ to the email as soon as she finishes her morning meeting.",c:["a) replied","b) reply","c) replies","d) replying"],a:"b) reply",e:"reply = المصدر بعد will",r:"will + verb (base form)"},
+  {t:"The office party is tomorrow. We ____ celebrate together.",c:["a) are going to","b) will","c) be","d) Will be"],a:"a) are going to",e:"are going to = خطة مقررة",r:"are going to للخطط المسبقة"},
+  {t:"Tomorrow, we ____ explore the new café that opened downtown.",c:["a) will","b) are","c) did","d) were"],a:"a) will",e:"will = خطة مستقبلية",r:"will للخطط المستقبلية"},
+  {t:"He ____ download a language-learning app to practice Spanish.",c:["a) is going","b) will going to","c) will","d) don't"],a:"c) will",e:"will = نية مستقبلية",r:"will للنوايا المستقبلية"},
+  {t:"If I have time, I will ____ to the library to return and borrow some books.",c:["a) went","b) goes","c) going","d) go"],a:"d) go",e:"go = المصدر بعد will",r:"will + verb (base form)"},
+  {t:"The school starts soon. I ____ buy the required textbooks this week.",c:["a) will","b) am going to","c) are going to","d) be"],a:"b) am going to",e:"am going to = خطة مسبقة",r:"am going to للخطط المسبقة"},
+  {t:"They will ____ the living room walls blue.",c:["a) paint","b) paints","c) painting","d) painted"],a:"a) paint",e:"paint = المصدر بعد will",r:"will + verb (base form)"},
+  {t:"I will ____ a table at our favorite restaurant.",c:["a) books","b) book","c) booking","d) booked"],a:"b) book",e:"book = المصدر بعد will",r:"will + verb (base form)"},
+  {t:"The gardening tools are ready. I ____ plant new flowers.",c:["a) will","b) is going to","c) am going to","d) will be"],a:"c) am going to",e:"am going to = خطة مسبقة",r:"am going to للخطط المسبقة"},
+  {t:"He will ____ his neighbor move furniture into the new apartment.",c:["a) helps","b) help","c) helping","d) helped"],a:"b) help",e:"help = المصدر بعد will",r:"will + verb (base form)"}
+]
+  },
+  "present_continuous":{
+    label:"📕 Present Continuous — المضارع المستمر",
+    questions:[
+  /* AFFIRMATIVE Q1-23 (minus duplicates 18,20,21) */
+  {t:"I ____ my homework right now.",c:["a) am doing","b) did","c) does","d) will do"],a:"a) am doing",e:"am doing = المضارع المستمر مع I",r:"I + am + verb-ing"},
+  {t:"Look! Ali ____ with a ball.",c:["a) is playing","b) play","c) plays","d) played"],a:"a) is playing",e:"is playing = المضارع المستمر",r:"Look! تدل على المضارع المستمر"},
+  {t:"Listen! The dog ____.",c:["a) bark","b) baked","c) barking","d) is barking"],a:"d) is barking",e:"is barking = المضارع المستمر",r:"Listen! تدل على المضارع المستمر"},
+  {t:"At present, the bird is ____ in the tree.",c:["a) singing","b) sing","c) sang","d) sings"],a:"a) singing",e:"singing = verb-ing بعد is",r:"is + verb-ing"},
+  {t:"Now, the baby is ____ with a toy.",c:["a) is playing","b) play","c) played","d) playing"],a:"d) playing",e:"playing = verb-ing بعد is",r:"is + verb-ing"},
+  {t:"At the moment, the sun ____ in the sky.",c:["a) shine","b) shines","c) is shining","d) shining"],a:"c) is shining",e:"is shining = المضارع المستمر",r:"at the moment تدل على المضارع المستمر"},
+  {t:"Ahmed is ____ TV now.",c:["a) watch","b) watches","c) watching","d) watched"],a:"c) watching",e:"watching = verb-ing بعد is",r:"is + verb-ing"},
+  {t:"At present, my sister ____ a book.",c:["a) a) reads","b) read","c) is read","d) is reading"],a:"d) is reading",e:"is reading = المضارع المستمر",r:"at present تدل على المضارع المستمر"},
+  {t:"I am ____ a tree now.",c:["a) is planted","b) plants","c) planting","d) planted"],a:"c) planting",e:"planting = verb-ing بعد am",r:"am + verb-ing"},
+  {t:"Hany ____ TV in the living room.",c:["a) watch","b) watches","c) watching","d) are watching"],a:"c) watching",e:"watching = المضارع المستمر",r:"is + verb-ing → is watching"},
+  {t:"They are ____ on the phone now.",c:["a) talk","b) talks","c) talking","d) talked"],a:"c) talking",e:"talking = verb-ing بعد are",r:"are + verb-ing"},
+  {t:"At the moment, the teacher is ____ a lesson.",c:["a) teach","b) taught","c) teaching","d) teaches"],a:"c) teaching",e:"teaching = verb-ing بعد is",r:"is + verb-ing"},
+  {t:"The children are ____ in the park now.",c:["a) playing","b) played","c) plays","d) will play"],a:"a) playing",e:"playing = verb-ing بعد are",r:"are + verb-ing"},
+  {t:"Look! The cat is ____ on the couch.",c:["a) sleep","b) sleeping","c) slept","d) sleeps"],a:"b) sleeping",e:"sleeping = verb-ing بعد is",r:"Look! تدل على المضارع المستمر"},
+  {t:"At present, Faten ____ to music.",c:["a) listen","b) listened","c) listens","d) is listening"],a:"d) is listening",e:"is listening = المضارع المستمر",r:"at present تدل على المضارع المستمر"},
+  {t:"Faten is ____ on her dress for the party.",c:["a) tries","b) try","c) trying","d) tried"],a:"c) trying",e:"trying = verb-ing بعد is",r:"is + verb-ing"},
+  {t:"The baker is ____ bread in the oven.",c:["a) baking","b) bake","c) bakes","d) baked"],a:"a) baking",e:"baking = verb-ing بعد is",r:"is + verb-ing"},
+  {t:"Ahmed and Amr are ____ a film now.",c:["a) watch","b) watches","c) watching","d) watched"],a:"c) watching",e:"watching = verb-ing بعد are",r:"are + verb-ing"},
+  {t:"My dad is ____ coffee at the moment.",c:["a) drink","b) drinks","c) drinking","d) drunk"],a:"c) drinking",e:"drinking = verb-ing بعد is",r:"is + verb-ing"},
+  {t:"The carpenter is ____ a table.",c:["a) make","b) makes","c) making","d) made"],a:"c) making",e:"making = verb-ing بعد is",r:"is + verb-ing"},
+  /* NEGATIVE Q24-47 */
+  {t:"Lames ____ in the park now.",c:["a) isn't played","b) isn't playing","c) plays","d) play"],a:"b) isn't playing",e:"isn't playing = نفي المضارع المستمر",r:"isn't + verb-ing"},
+  {t:"Mary ____ eating her lunch right now.",c:["a) isn't","b) didn't","c) doesn't","d) are not"],a:"a) isn't",e:"isn't = نفي المضارع المستمر",r:"isn't + verb-ing"},
+  {t:"Mady and Mody aren't ____ video games at the moment.",c:["a) play","b) playing","c) plays","d) played"],a:"b) playing",e:"playing = verb-ing بعد aren't",r:"aren't + verb-ing"},
+  {t:"Look! The birds ____ flying in the sky.",c:["a) don't","b) didn't","c) are not","d) isn't"],a:"c) are not",e:"are not = نفي المضارع المستمر",r:"are not + verb-ing مع الجمع"},
+  {t:"The students ____ taking a test now.",c:["a) are not","b) didn't","c) doesn't","d) don't"],a:"a) are not",e:"are not = نفي المضارع المستمر",r:"are not + verb-ing مع الجمع"},
+  {t:"Mr Ahmed ____ English at the class now.",c:["a) doesn't teach","b) isn't teaching","c) don't teach","d) teaches"],a:"b) isn't teaching",e:"isn't teaching = نفي المضارع المستمر",r:"isn't + verb-ing"},
+  {t:"The kids ____ running in the park.",c:["a) don't","b) didn't","c) aren't","d) isn't"],a:"c) aren't",e:"aren't = نفي المضارع المستمر مع الجمع",r:"aren't + verb-ing"},
+  {t:"Hany and Amira aren't ____ at the moment.",c:["a) sing","b) sings","c) singing","d) sang"],a:"c) singing",e:"singing = verb-ing بعد aren't",r:"aren't + verb-ing"},
+  {t:"Listen! The music ____ in the room.",c:["a) isn't playing","b) playing","c) doesn't play","d) plays"],a:"a) isn't playing",e:"isn't playing = نفي المضارع المستمر",r:"isn't + verb-ing"},
+  {t:"My uncle ____ a flower now.",c:["a) growing","b) grows","c) are growing","d) is growing"],a:"d) is growing",e:"is growing = المضارع المستمر",r:"is + verb-ing مع المفرد"},
+  {t:"Nour ____ washing the car now.",c:["a) isn't","b) didn't","c) are not","d) wasn't"],a:"a) isn't",e:"isn't = نفي المضارع المستمر",r:"isn't + verb-ing"},
+  {t:"My mom isn't ____ our meal.",c:["a) make","b) makes","c) making","d) made"],a:"c) making",e:"making = verb-ing بعد isn't",r:"isn't + verb-ing"},
+  {t:"Mrs Lamiaa isn't ____ the second lesson now.",c:["a) teach","b) taught","c) teaching","d) teaches"],a:"c) teaching",e:"teaching = verb-ing بعد isn't",r:"isn't + verb-ing"},
+  {t:"Layla and her sister aren't ____ the goats at present.",c:["a) feed","b) feeding","c) feeds","d) will feed"],a:"b) feeding",e:"feeding = verb-ing بعد aren't",r:"aren't + verb-ing"},
+  {t:"Look! The dog isn't ____ at the street.",c:["a) runs","b) run","c) running","d) ran"],a:"c) running",e:"running = verb-ing بعد isn't",r:"isn't + verb-ing"},
+  {t:"Our parents ____ us some stories at the moment.",c:["a) telling","b) tell","c) tells","d) told"],a:"a) telling",e:"are telling = المضارع المستمر",r:"are + verb-ing مع الجمع"},
+  {t:"At the moment, Mazen ____ the plants in the garden.",c:["a) water","b) watered","c) isn't watering","d) waters"],a:"c) isn't watering",e:"isn't watering = نفي المضارع المستمر",r:"isn't + verb-ing"},
+  {t:"William is not ____ a new language online now.",c:["a) learn","b) learnt","c) learns","d) learning"],a:"d) learning",e:"learning = verb-ing بعد is not",r:"is not + verb-ing"},
+  {t:"Look, Salma ____ a picture of her pet.",c:["a) isn't drawing","b) drawing","c) doesn't draw","d) draws"],a:"a) isn't drawing",e:"isn't drawing = نفي المضارع المستمر",r:"isn't + verb-ing"},
+  {t:"Lobna ____ her homework now.",c:["a) does","b) isn't doing","c) doing","d) did"],a:"b) isn't doing",e:"isn't doing = نفي المضارع المستمر",r:"isn't + verb-ing"},
+  {t:"Now, My uncle is not ____ his bike in the garage.",c:["a) fixing","b) fix","c) fixes","d) is reading"],a:"a) fixing",e:"fixing = verb-ing بعد is not",r:"is not + verb-ing"},
+  {t:"Mohamed Salah ____ a goal now.",c:["a) score","b) scores","c) scoring","d) is scoring"],a:"d) is scoring",e:"is scoring = المضارع المستمر",r:"is + verb-ing"},
+  {t:"My friend is ____ tea at the moment.",c:["a) make","b) makes","c) making","d) drunk"],a:"c) making",e:"making = verb-ing بعد is",r:"is + verb-ing"},
+  {t:"We ____ for the keys now.",c:["a) are looking","b) looks","c) look","d) looked"],a:"a) are looking",e:"are looking = المضارع المستمر مع الجمع",r:"are + verb-ing"},
+  /* QUESTIONS Q48-71 */
+  {t:"What is Mr Ahmed ____ now?",c:["a) do","b) did","c) doing","d) does"],a:"c) doing",e:"doing = verb-ing في سؤال المضارع المستمر",r:"What is + subject + verb-ing?"},
+  {t:"Where ____ Sarah going?",c:["a) do","b) does","c) did","d) is"],a:"d) is",e:"is = فعل مساعد في سؤال المضارع المستمر",r:"Where + is + subject + verb-ing?"},
+  {t:"Is she ____ for her exam?",c:["a) study","b) studies","c) studying","d) studied"],a:"c) studying",e:"studying = verb-ing في سؤال المضارع المستمر",r:"Is + subject + verb-ing?"},
+  {t:"____ they driving their car now?",c:["a) Are","b) Do","c) Does","d) Will"],a:"a) Are",e:"Are = فعل مساعد مع الجمع",r:"Are + they + verb-ing?"},
+  {t:"Who ____ dinner at the moment?",c:["a) cook","b) cooked","c) is cooking","d) cooks"],a:"c) is cooking",e:"is cooking = المضارع المستمر",r:"Who + is + verb-ing?"},
+  {t:"Why is Sama ____ TV?",c:["a) watch","b) watching","c) watches","d) watched"],a:"b) watching",e:"watching = verb-ing في سؤال المضارع المستمر",r:"Why is + subject + verb-ing?"},
+  {t:"Are the girls ____ outside now?",c:["a) playing","b) play","c) plays","d) played"],a:"a) playing",e:"playing = verb-ing في سؤال المضارع المستمر",r:"Are + subject + verb-ing?"},
+  {t:"When is Ramy ____ the work?",c:["a) finishes","b) finishing","c) finished","d) finish"],a:"b) finishing",e:"finishing = verb-ing في سؤال المضارع المستمر",r:"When is + subject + verb-ing?"},
+  {t:"What are the neighbors ____?",c:["a) discussing","b) discuss","c) discusses","d) discussed"],a:"a) discussing",e:"discussing = verb-ing في سؤال المضارع المستمر",r:"What are + subject + verb-ing?"},
+  {t:"Is David listening to music? Yes, he ____.",c:["a) is","b) does","c) are","d) do"],a:"a) is",e:"is = الإجابة المثبتة القصيرة",r:"Yes, he is"},
+  {t:"____ they reading some books now? No, they aren't.",c:["a) Do","b) Does","c) Is","d) Are"],a:"d) Are",e:"Are = فعل مساعد مع الجمع",r:"Are + they + verb-ing?"},
+  {t:"Why are ____ crying now?",c:["a) Marwa","b) Nour and Sama","c) She","d) I"],a:"b) Nour and Sama",e:"Nour and Sama = جمع مع are",r:"Why are + جمع + verb-ing?"},
+  {t:"Are you ____ to the teacher?",c:["a) listen","b) listening","c) listenes","d) listened"],a:"b) listening",e:"listening = verb-ing في سؤال المضارع المستمر",r:"Are + you + verb-ing?"},
+  {t:"____ you drawing a picture?",c:["a) Is","b) Do","c) Does","d) Are"],a:"d) Are",e:"Are = فعل مساعد مع you",r:"Are + you + verb-ing?"},
+  {t:"Are you ____ questions?",c:["a) asks","b) asking","c) asked","d) ask"],a:"b) asking",e:"asking = verb-ing في سؤال المضارع المستمر",r:"Are + you + verb-ing?"},
+  {t:"Why ____ learning new words now?",c:["a) you are","b) are you","c) are","d) is"],a:"b) are you",e:"are you = ترتيب السؤال",r:"Why + are + subject + verb-ing?"},
+  {t:"Are you singing a new song? Yes, ____.",c:["a) I do","b) I sang","c) isn't watering","d) I'm"],a:"d) I'm",e:"I'm = الإجابة المثبتة القصيرة",r:"Yes, I am — مختصرة I'm"},
+  {t:"What ____ watching now?",c:["a) is she","b) she is","c) does she","d) did she"],a:"a) is she",e:"is she = ترتيب السؤال",r:"What + is + subject + verb-ing?"},
+  {t:"Are you ____ the rules at the moment?",c:["a) following","b) follow","c) follows","d) followed"],a:"a) following",e:"following = verb-ing في سؤال المضارع المستمر",r:"Are + you + verb-ing?"},
+  {t:"Are Maggy and Roma ____ the kitchen?",c:["a) cleans","b) cleans","c) cleaning","d) cleaned"],a:"c) cleaning",e:"cleaning = verb-ing في سؤال المضارع المستمر",r:"Are + subject + verb-ing?"},
+  {t:"What ____ you eating?",c:["a) are","b) is","c) do","d) doing"],a:"a) are",e:"are = فعل مساعد مع you",r:"What + are + you + verb-ing?"},
+  {t:"Where ____ going now?",c:["a) are","b) is","c) you are","d) are you"],a:"d) are you",e:"are you = ترتيب السؤال",r:"Where + are + you + verb-ing?"},
+  {t:"Are your friends ____ basketball at the moment?",c:["a) play","b) plays","c) playing","d) played"],a:"c) playing",e:"playing = verb-ing في سؤال المضارع المستمر",r:"Are + subject + verb-ing?"},
+  {t:"____ drinking juice now?",c:["a) Are","b) Is","c) Does","d) Was"],a:"a) Are",e:"Are = فعل مساعد مع الجمع",r:"Are + they/you + verb-ing?"}
+]
+  },
+  "past_continuous":{
+    label:"📓 Past Continuous — الماضي المستمر",
+    questions:[]
+  },
+  "present_perfect":{
+    label:"📗 Present Perfect",
+    questions:[
+  /* AFFIRMATIVE */
+  {t:"Ahmed ____ already baked a cake for the party.",c:["a) has","b) have","c) does","d) is"],a:"a) has",e:"has = المضارع التام مع المفرد",r:"Ahmed مفرد → has + past participle"},
+  {t:"They ____ Paris before.",c:["a) have visited","b) visited","c) visit","d) visits"],a:"a) have visited",e:"have visited = المضارع التام مع الجمع",r:"before تدل على المضارع التام"},
+  {t:"I ____ chicken recently.",c:["a) have eaten","b) eat","c) eats","d) ate"],a:"a) have eaten",e:"have eaten = المضارع التام",r:"recently تدل على المضارع التام"},
+  {t:"Rana has ____ her homework.",c:["a) complete","b) completing","c) has completed","d) completed"],a:"d) completed",e:"completed = التصريف الثالث بعد has",r:"has + past participle → completed"},
+  {t:"The children have just ____ their rooms.",c:["a) cleans","b) cleaned","c) cleans","d) clean"],a:"b) cleaned",e:"cleaned = التصريف الثالث بعد have just",r:"just تدل على المضارع التام"},
+  {t:"We ____ already watched this movie.",c:["a) have","b) has","c) had","d) having"],a:"a) have",e:"have = المضارع التام مع الجمع",r:"We + have → have already watched"},
+  {t:"The cat ____ a mouse.",c:["a) is caught","b) catches","c) has caught","d) catch"],a:"c) has caught",e:"has caught = المضارع التام مع المفرد",r:"The cat مفرد → has + past participle"},
+  {t:"She ____ to New York.",c:["a) has never","b) been, never","c) has never been","d) has being be"],a:"c) has never been",e:"has never been = المضارع التام مع never",r:"never يأتي بين has/have والتصريف الثالث"},
+  {t:"They ____ English since 2012.",c:["a) has studied","b) study","c) have studied","d) studied"],a:"c) have studied",e:"have studied = المضارع التام مع الجمع",r:"since تدل على المضارع التام"},
+  {t:"Ahmed and Amer ____ a new house.",c:["a) built","b) has","c) build building","d) have built"],a:"d) have built",e:"have built = المضارع التام مع الجمع",r:"Ahmed and Amer جمع → have + past participle"},
+  {t:"My brother ____ the vase.",c:["a) has broken","b) broke","c) breaks","d) breaking"],a:"a) has broken",e:"has broken = المضارع التام مع المفرد",r:"My brother مفرد → has + past participle"},
+  {t:"They ____ lived in this neighborhood for five years.",c:["a) has","b) have","c) does","d) did"],a:"b) have",e:"have = المضارع التام مع الجمع",r:"They جمع → have lived"},
+  {t:"Ramey and Shady have ____ in the park recently.",c:["a) playing","b) played","c) play","d) plays"],a:"b) played",e:"played = التصريف الثالث بعد have",r:"have + past participle → played"},
+  {t:"I have ____ tennis for three years.",c:["a) Practice","b) Practices","c) have Practiced","d) Practiced"],a:"d) Practiced",e:"Practiced = التصريف الثالث بعد have",r:"have + past participle → Practiced"},
+  {t:"She ____ in that house since she was born.",c:["a) lives","b) has lived","c) have lived","d) live"],a:"b) has lived",e:"has lived = المضارع التام مع المفرد",r:"since تدل على المضارع التام — She مفرد"},
+  {t:"I have ____ a rainbow.",c:["a) saw","b) seen","c) have seen","d) seen"],a:"b) seen",e:"seen = التصريف الثالث بعد have",r:"have + past participle → seen"},
+  {t:"Ahmed ____ been to the zoo.",c:["a) have","b) have never","c) has never","d) never"],a:"c) has never",e:"has never = المضارع التام مع never",r:"Ahmed مفرد → has never been"},
+  {t:"Mona has already ____ ice cream.",c:["a) liked","b) likes","c) like","d) is liked"],a:"a) liked",e:"liked = التصريف الثالث بعد has",r:"has + past participle → liked"},
+  {t:"We ____ the beach.",c:["a) visit","b) visited","c) have visited","d) visits"],a:"c) have visited",e:"have visited = المضارع التام مع الجمع",r:"We جمع → have visited"},
+  {t:"They have already ____ dinner.",c:["a) eat","b) ate","c) eats","d) eaten"],a:"d) eaten",e:"eaten = التصريف الثالث بعد have",r:"have + past participle → eaten"},
+  {t:"The cat ____ with us for a long time.",c:["a) has","b) lived","c) has lived","d) have lived"],a:"c) has lived",e:"has lived = المضارع التام مع المفرد",r:"The cat مفرد → has lived"},
+  {t:"My mom ____ my dad since high school.",c:["a) known","b) has","c) has known","d) knows"],a:"c) has known",e:"has known = المضارع التام مع المفرد",r:"since تدل على المضارع التام"},
+  {t:"I have ____ my housework.",c:["a) do","b) does","c) have done","d) done"],a:"d) done",e:"done = التصريف الثالث بعد have",r:"have + past participle → done"},
+  /* NEGATIVE */
+  {t:"Grandma has not ____ cookies.",c:["a) bake","b) baked","c) baking","d) bakes"],a:"b) baked",e:"baked = التصريف الثالث بعد has not",r:"has not + past participle → baked"},
+  {t:"The owl ____ hooted yet.",c:["a) doesn't","b) isn't","c) aren't","d) hasn't"],a:"d) hasn't",e:"hasn't = نفي المضارع التام مع المفرد",r:"The owl مفرد → hasn't hooted yet"},
+  {t:"We have not ____ English.",c:["a) studies","b) studying","c) studied","d) study"],a:"c) studied",e:"studied = التصريف الثالث بعد have not",r:"have not + past participle → studied"},
+  {t:"They haven't ____ here for years.",c:["a) live","b) lived","c) living","d) lives"],a:"b) lived",e:"lived = التصريف الثالث بعد haven't",r:"haven't + past participle → lived"},
+  {t:"She ____ in the bank for five years.",c:["a) has","b) have","c) hasn't worked","d) worked hasn't"],a:"c) hasn't worked",e:"hasn't worked = نفي المضارع التام",r:"She مفرد → hasn't worked"},
+  {t:"We ____ the same car for ten years.",c:["a) haven't had","b) hasn't had","c) had had","d) hadn't have"],a:"a) haven't had",e:"haven't had = نفي المضارع التام مع الجمع",r:"We جمع → haven't had"},
+  {t:"We ____ her today.",c:["a) haven't","b) seen","c) seen haven't","d) haven't seen"],a:"d) haven't seen",e:"haven't seen = نفي المضارع التام",r:"haven't + past participle → seen"},
+  {t:"The moon ____ brightly.",c:["a) hasn't shone","b) shone","c) shine","d) shines"],a:"a) hasn't shone",e:"hasn't shone = نفي المضارع التام",r:"The moon مفرد → hasn't shone"},
+  {t:"I have not ____ my lunch yet.",c:["a) eats","b) eaten","c) ate","d) eating"],a:"b) eaten",e:"eaten = التصريف الثالث بعد have not",r:"have not + past participle → eaten"},
+  {t:"The train ____ left the station.",c:["a) haven't","b) doesn't have","c) hasn't","d) isn't"],a:"c) hasn't",e:"hasn't = نفي المضارع التام مع المفرد",r:"The train مفرد → hasn't left"},
+  {t:"The ducks have not ____ in the pond.",c:["a) swim","b) swam","c) swum","d) swimming"],a:"c) swum",e:"swum = التصريف الثالث من swim",r:"have not + past participle → swum"},
+  {t:"Ahmed ____ the shower yet.",c:["a) hasn't taken","b) has","c) has taken","d) have taken"],a:"a) hasn't taken",e:"hasn't taken = نفي المضارع التام",r:"Ahmed مفرد → hasn't taken"}
+    ,
+  {t:"I ____ finished my homework yet.",c:["a) have","b) has","c) hasn't","d) haven't"],a:"a) have",e:"have = المضارع التام مع I",r:"I + have + past participle + yet"},
+  {t:"She ____ eaten her dinner.",c:["a) hasn't","b) have","c) is","d) did"],a:"a) hasn't",e:"hasn't = نفي المضارع التام مع المفرد",r:"hasn't + past participle"},
+  {t:"We ____ the house yet.",c:["a) cleaned","b) has cleaned","c) cleans","d) haven't clean"],a:"d) haven't clean",e:"haven't = نفي المضارع التام مع الجمع",r:"haven't + past participle + yet"},
+  {t:"My family ____ a photo of the museum.",c:["a) hasn't","b) hasn't picked","c) hasn't picked","d) haven't picked"],a:"b) hasn't picked",e:"hasn't picked = نفي المضارع التام مع المفرد",r:"hasn't + past participle"},
+  {t:"They ____ the play.",c:["a) haven't","b) hasn't","c) haven't watched","d) watches"],a:"c) haven't watched",e:"haven't watched = نفي المضارع التام مع الجمع",r:"haven't + past participle"},
+  {t:"I ____ that book.",c:["a) have","b) not read","c) not have read","d) have not read"],a:"d) have not read",e:"have not read = نفي المضارع التام",r:"have not + past participle"},
+  {t:"She has not ____ coffee.",c:["a) drunk","b) drinks","c) drinking","d) drink"],a:"a) drunk",e:"drunk = التصريف الثالث من drink",r:"has not + past participle → drunk"},
+  {t:"Mr Ahmed and Nour ____ their car.",c:["a) buying","b) buy","c) haven't bought","d) buys"],a:"c) haven't bought",e:"haven't bought = نفي المضارع التام",r:"haven't + past participle"},
+  {t:"Ramy has not ____ the hidden treasure.",c:["a) find","b) found","c) finding","d) finds"],a:"b) found",e:"found = التصريف الثالث من find",r:"has not + past participle → found"},
+  {t:"They ____ painted the picture.",c:["a) isn't","b) didn't","c) haven't","d) hasn't"],a:"c) haven't",e:"haven't = نفي المضارع التام مع الجمع",r:"haven't + past participle"},
+  {t:"I ____ seen my grandpa since 2005.",c:["a) hasn't","b) didn't","c) haven't","d) aren't"],a:"c) haven't",e:"haven't = نفي المضارع التام مع I",r:"haven't + past participle + since"},
+  {t:"She has not ridden a camel ____.",c:["a) just","b) already","c) yet","d) for"],a:"c) yet",e:"yet = لم...بعد في الجمل المنفية",r:"has not + past participle + yet"},
+  {t:"Have you ever ____ a zoo?",c:["a) visit","b) visited","c) visiting","d) is visiting"],a:"b) visited",e:"visited = التصريف الثالث بعد Have ever",r:"Have you ever + past participle?"},
+  {t:"____ Ahmed eaten sushi before?",c:["a) Has","b) Have","c) Did","d) Does"],a:"a) Has",e:"Has = فعل مساعد مع المفرد في المضارع التام",r:"Has + subject + past participle?"},
+  {t:"____ Ahmed and Ali watched a scary movie?",c:["a) Has","b) Have","c) Did","d) Does"],a:"b) Have",e:"Have = فعل مساعد مع الجمع في المضارع التام",r:"Have + subject + past participle?"},
+  {t:"What ____ you learned in school this year?",c:["a) does","b) have","c) did","d) do"],a:"b) have",e:"have = فعل مساعد في سؤال المضارع التام",r:"What + have + subject + past participle?"},
+  {t:"Where have you ____ during your summer vacation?",c:["a) travel","b) travels","c) traveled","d) traveling"],a:"c) traveled",e:"traveled = التصريف الثالث بعد have",r:"Where + have + subject + past participle?"},
+  {t:"When have you ____ your birthday?",c:["a) celebrating","b) celebrates","c) celebrate","d) celebrated"],a:"c) celebrate",e:"celebrate = المصدر بعد have",r:"When + have + subject + verb?"},
+  {t:"How many books ____ read so far?",c:["a) you have","b) have you","c) have","d) you"],a:"b) have you",e:"have you = ترتيب السؤال في المضارع التام",r:"How many + have + subject + past participle?"},
+  {t:"Who have you ____ with at the playground?",c:["a) played","b) plays","c) playing","d) play"],a:"a) played",e:"played = التصريف الثالث بعد have",r:"Who + have + subject + past participle?"},
+  {t:"Have you ever ____ a horse?",c:["a) ride","b) rode","c) ridden","d) riding"],a:"c) ridden",e:"ridden = التصريف الثالث من ride",r:"Have you ever + past participle?"},
+  {t:"____ she met a famous person?",c:["a) Have","b) Has","c) Does","d) Is"],a:"b) Has",e:"Has = فعل مساعد مع she في المضارع التام",r:"Has + she + past participle?"},
+  {t:"Have you ____ a sandcastle?",c:["a) build","b) building","c) built","d) builds"],a:"c) built",e:"built = التصريف الثالث من build",r:"Have + subject + past participle?"},
+  {t:"Have ____ visited a farm?",c:["a) you ever","b) ever","c) he","d) it"],a:"b) ever",e:"ever = للسؤال في المضارع التام",r:"Have + ever + subject + past participle?"},
+  {t:"We have been in the same class ____ 2 years.",c:["a) for","b) since"],a:"a) for",e:"for = لفترة زمنية",r:"for + مدة زمنية (2 years)"},
+  {t:"We have lived here ____ March of 2010.",c:["a) for","b) since"],a:"b) since",e:"since = منذ نقطة زمنية محددة",r:"since + نقطة زمنية (March 2010)"},
+  {t:"He has been my teacher ____ May.",c:["a) for","b) since"],a:"b) since",e:"since = منذ نقطة زمنية محددة",r:"since + شهر أو تاريخ محدد"},
+  {t:"They have studied web design ____ 3 months.",c:["a) for","b) since"],a:"a) for",e:"for = لفترة زمنية",r:"for + مدة زمنية (3 months)"},
+  {t:"Facebook has been popular ____ 5 years.",c:["a) for","b) since"],a:"a) for",e:"for = لفترة زمنية",r:"for + مدة زمنية (5 years)"},
+  {t:"I have had my iPhone ____ February 14th.",c:["a) for","b) since"],a:"b) since",e:"since = منذ تاريخ محدد",r:"since + تاريخ محدد (February 14th)"},
+  {t:"My city has had an underground system ____ 3 decades.",c:["a) for","b) since"],a:"a) for",e:"for = لفترة زمنية",r:"for + مدة زمنية (3 decades)"},
+  {t:"Humans have travelled in space ____ 1964.",c:["a) for","b) since"],a:"b) since",e:"since = منذ سنة محددة",r:"since + سنة (1964)"},
+  {t:"Ahmed has been to Paris ____ 3 weeks.",c:["a) for","b) since"],a:"a) for",e:"for = لفترة زمنية",r:"for + مدة زمنية (3 weeks)"},
+  {t:"I have lived in Cairo ____ 2006.",c:["a) for","b) since"],a:"b) since",e:"since = منذ سنة محددة",r:"since + سنة (2006)"},
+  {t:"Magdy has been in my class ____ 2 years.",c:["a) for","b) since"],a:"a) for",e:"for = لفترة زمنية",r:"for + مدة زمنية"},
+  {t:"Have you been married ____ a long time?",c:["a) for","b) since"],a:"a) for",e:"for = لفترة زمنية",r:"for + مدة (a long time)"},
+  {t:"I've been surfing the Net ____ half past seven this morning.",c:["a) for","b) since"],a:"b) since",e:"since = منذ وقت محدد",r:"since + وقت محدد (half past seven)"},
+  {t:"The doctor has been at the hospital ____ 3 hours.",c:["a) for","b) since"],a:"a) for",e:"for = لفترة زمنية",r:"for + مدة (3 hours)"},
+  {t:"She's been talking ____ 20 minutes.",c:["a) for","b) since"],a:"a) for",e:"for = لفترة زمنية",r:"for + مدة (20 minutes)"},
+  {t:"Matt hasn't seen Clare ____ his school days.",c:["a) for","b) since"],a:"b) since",e:"since = منذ فترة محددة",r:"since + نقطة زمنية (school days)"},
+  {t:"Our boss hasn't come to the office ____ three days now.",c:["a) for","b) since"],a:"a) for",e:"for = لفترة زمنية",r:"for + مدة (three days)"},
+  {t:"We haven't been on a day trip to the country ____ September.",c:["a) for","b) since"],a:"b) since",e:"since = منذ شهر محدد",r:"since + شهر (September)"},
+  {t:"I haven't been to a football match ____ a long time.",c:["a) for","b) since"],a:"a) for",e:"for = لفترة زمنية",r:"for + مدة (a long time)"},
+  {t:"I've been living in Spain ____ 1992.",c:["a) for","b) since"],a:"b) since",e:"since = منذ سنة محددة",r:"since + سنة (1992)"},
+  {t:"I've been living in Spain ____ 14 years.",c:["a) for","b) since"],a:"a) for",e:"for = لفترة زمنية",r:"for + مدة (14 years)"},
+  {t:"She hasn't been to the disco ____ three weeks.",c:["a) for","b) since"],a:"a) for",e:"for = لفترة زمنية",r:"for + مدة (three weeks)"},
+  {t:"I haven't seen Susanne ____ my birthday.",c:["a) for","b) since"],a:"b) since",e:"since = منذ حدث محدد",r:"since + حدث (my birthday)"},
+  {t:"I have ____ heard that Mr. Ali had an accident. His wife called me a minute ago.",c:["a) just","b) already","c) yet"],a:"a) just",e:"just = للتو (حدث مؤخراً جداً)",r:"just يأتي مع أحداث حدثت منذ لحظات"},
+  {t:"I have ____ finished my homework.",c:["a) just","b) already","c) yet"],a:"b) already",e:"already = بالفعل (أتممت الفعل)",r:"already في الجمل المثبتة"},
+  {t:"Have you finished answering all the questions ____?",c:["a) just","b) already","c) yet"],a:"c) yet",e:"yet = بعد (في الأسئلة والنفي)",r:"yet في نهاية الأسئلة"},
+  {t:"I have ____ done the washing up.",c:["a) just","b) already","c) yet"],a:"b) already",e:"already = بالفعل",r:"already في الجمل المثبتة"},
+  {t:"He has ____ arrived home. He is taking off his coat.",c:["a) just","b) already","c) yet"],a:"a) just",e:"just = للتو",r:"just للأحداث التي حدثت منذ لحظات"},
+  {t:"Has your father come home ____?",c:["a) just","b) already","c) yet"],a:"c) yet",e:"yet = بعد (في الأسئلة)",r:"yet في نهاية الأسئلة"},
+  {t:"An accident has ____ happened.",c:["a) just","b) already","c) yet"],a:"a) just",e:"just = للتو",r:"just للأحداث الطارئة الحديثة"}
+]
+  }
+};
+var activeQS=[];
+
+
+
+function playOK(){if(!soundEnabled)return;try{var x=new(window.AudioContext||window.webkitAudioContext)();[[523,0],[659,.15],[784,.3],[1047,.45]].forEach(function(a){var o=x.createOscillator(),g=x.createGain();o.connect(g);g.connect(x.destination);o.frequency.value=a[0];o.type="sine";g.gain.setValueAtTime(.4,x.currentTime+a[1]);g.gain.exponentialRampToValueAtTime(.001,x.currentTime+a[1]+.25);o.start(x.currentTime+a[1]);o.stop(x.currentTime+a[1]+.3);});}catch(e){}}
+function playBad(){if(!soundEnabled)return;try{var x=new(window.AudioContext||window.webkitAudioContext)();[[330,0],[294,.18],[262,.36]].forEach(function(a){var o=x.createOscillator(),g=x.createGain();o.connect(g);g.connect(x.destination);o.frequency.value=a[0];o.type="sawtooth";g.gain.setValueAtTime(.35,x.currentTime+a[1]);g.gain.exponentialRampToValueAtTime(.001,x.currentTime+a[1]+.22);o.start(x.currentTime+a[1]);o.stop(x.currentTime+a[1]+.25);});}catch(e){}}
+function playClick(){if(!soundEnabled)return;try{var x=new(window.AudioContext||window.webkitAudioContext)();var o=x.createOscillator(),g=x.createGain();o.connect(g);g.connect(x.destination);o.frequency.value=880;o.type="sine";g.gain.setValueAtTime(.18,x.currentTime);g.gain.exponentialRampToValueAtTime(.001,x.currentTime+.09);o.start(x.currentTime);o.stop(x.currentTime+.1);}catch(e){}}
+function confetti(){var cols=["#ff6b6b","#ffd93d","#6bcb77","#4d96ff","#ff6bce"];var st=document.createElement("style");st.textContent="@keyframes cf{to{transform:translateY(260px) rotate(720deg);opacity:0}}";document.head.appendChild(st);for(var i=0;i<40;i++){var c=document.createElement("div");var s=6+Math.random()*8;c.style.cssText="position:fixed;top:35%;left:"+(15+Math.random()*70)+"%;width:"+s+"px;height:"+s+"px;background:"+cols[i%5]+";border-radius:"+(Math.random()>.5?"50%":"3px")+";z-index:9999;animation:cf "+(1+Math.random()*1.5)+"s ease forwards "+(Math.random()*.4)+"s;";document.body.appendChild(c);(function(el){setTimeout(function(){el.remove();},2600);})(c);}}
+function playClick(){if(!soundEnabled)return;try{var x=new(window.AudioContext||window.webkitAudioContext)();var o=x.createOscillator(),g=x.createGain();o.connect(g);g.connect(x.destination);o.frequency.value=800;o.type="sine";g.gain.setValueAtTime(0.06,x.currentTime);g.gain.exponentialRampToValueAtTime(0.001,x.currentTime+0.08);o.start(x.currentTime);o.stop(x.currentTime+0.09);}catch(e){}}
+function toast(msg){var t=document.getElementById("toast");t.textContent=msg;t.style.display="block";setTimeout(function(){t.style.display="none";},2000);}
+
+/* SOUND CONTROL */
+var soundEnabled = true;
+var soundVolume = 0.7;
+function updateVolIcon(v){
+  var el=document.getElementById("volIcon");
+  if(!el)return;
+  el.textContent = v===0?"🔇":v<40?"🔉":"🔊";
+}
+
+/* SOLO WIN OVERLAY */
+function showSoloWin(score, total){
+  var pct = Math.round(score / total * 100);
+  var rating, emoji;
+  if(pct >= 90)      { rating = "رائع جداً! 🌟";           emoji = "🏆"; }
+  else if(pct >= 80) { rating = "ممتاز! 🎉";               emoji = "🥇"; }
+  else if(pct >= 70) { rating = "جيد جداً 👍";             emoji = "🥈"; }
+  else if(pct >= 60) { rating = "جيد 🙂";                  emoji = "🥉"; }
+  else               { rating = "ادرس الدرس مرة أخرى 📚";  emoji = "💪"; }
+
+  document.getElementById("winEmoji").textContent    = emoji;
+  document.getElementById("winRating").textContent   = rating;
+  document.getElementById("winScore").textContent    = score + " / " + total + " سؤال صح";
+  document.getElementById("winPercent").textContent  = pct + "%";
+
+  // floating stars
+  var ws = document.getElementById("winStars");
+  ws.innerHTML = "";
+  for(var i = 0; i < 30; i++){
+    var s = document.createElement("div");
+    var sz = 10 + Math.random() * 18;
+    s.style.cssText = "position:absolute;font-size:"+sz+"px;left:"+Math.random()*100+"%;top:"+Math.random()*100+"%;animation:star-float "+(3+Math.random()*4)+"s linear "+(Math.random()*3)+"s infinite;";
+    s.textContent = ["⭐","🌟","✨","💫"][Math.floor(Math.random()*4)];
+    ws.appendChild(s);
+  }
+
+  document.getElementById("soloWinOverlay").style.display = "flex";
+  if(pct >= 60){ confetti(); playOK(); }
+}
+
+document.getElementById("winClose").addEventListener("click", function(){
+  playClick();
+  document.getElementById("soloWinOverlay").style.display = "none";
+  goTo("pgTestSelect");
+});
+
+/* DEVICE SELECTION MODAL */
+function pickDevice(cls){
+  playClick();
+  document.body.classList.remove("dev-phone","dev-pc");
+  if(cls) document.body.classList.add(cls);
+  document.getElementById("deviceOverlay").style.display="none";
+}
+document.getElementById("devPhone").addEventListener("click",function(){pickDevice("dev-phone");});
+document.getElementById("devPC").addEventListener("click",function(){pickDevice(null);});
+
+/* SETTINGS */
+document.getElementById("settingsBtn").addEventListener("click",function(){
+  playClick();
+  document.getElementById("settingsOverlay").style.display="flex";
+});
+document.getElementById("volSlider").addEventListener("input",function(){
+  var raw=+this.value;
+  // exponential curve: makes each step sound clearly different
+  soundVolume=Math.pow(raw/100, 1.8);
+  soundEnabled=raw>0;
+  document.getElementById("volVal").textContent=raw+"%";
+  updateVolIcon(raw);
+});
+
+document.getElementById("settingsClose").addEventListener("click",function(){
+  playClick();
+  document.getElementById("settingsOverlay").style.display="none";
+});
+document.getElementById("setPhone").addEventListener("click",function(){
+  pickDevice("dev-phone");
+  document.getElementById("settingsOverlay").style.display="none";
+});
+document.getElementById("setPC").addEventListener("click",function(){
+  pickDevice(null);
+  document.getElementById("settingsOverlay").style.display="none";
+});
+document.getElementById("settingsOverlay").addEventListener("click",function(e){
+  if(e.target===this){playClick();this.style.display="none";}
+});
+
+/* BUTTON CLICK SOUND — all buttons */
+document.addEventListener("click",function(e){if(e.target.tagName==="BUTTON"||e.target.closest("button")||e.target.classList.contains("si")||e.target.classList.contains("tgt")){playClick();}});
+
+/* DECORATIONS */
+var sp=document.getElementById("sparkles");
+for(var i=0;i<18;i++){var s=document.createElement("div");s.className="sparkle";var z=Math.random()*5+3;s.style.cssText="width:"+z+"px;height:"+z+"px;top:"+Math.random()*65+"%;left:"+Math.random()*100+"%;animation-delay:"+Math.random()*3+"s;animation-duration:"+(2+Math.random()*3)+"s;";sp.appendChild(s);}
+var re=document.getElementById("rays");
+for(var i=0;i<12;i++){var r=document.createElement("div");r.className="ray";r.style.transform="rotate("+(i*30)+"deg)";re.appendChild(r);}
+var gr=document.getElementById("grass");
+for(var i=0;i<50;i++){var g=document.createElement("div");g.className="gblade";var h=22+Math.random()*32;g.style.cssText="height:"+h+"px;left:"+Math.random()*100+"%;animation-delay:"+Math.random()*2+"s;animation-duration:"+(1.5+Math.random()*1.5)+"s;opacity:"+(0.55+Math.random()*0.45)+";";gr.appendChild(g);}
+
+/* PAGE NAVIGATION */
+function goTo(id){document.querySelectorAll(".pg").forEach(function(p){p.classList.remove("on");});document.getElementById(id).classList.add("on");window.scrollTo(0,0);}
+
+/* ========== SOLO ========== */
+var sIdx=0,sSc=0,sAns=false,sTestStart=0,sTestEnd=12;
+
+// Test selection
+document.getElementById("testSelectBack").addEventListener("click",function(){playClick();goTo("pgMode");});
+[1,2,3,4].forEach(function(n){
+  document.getElementById("testBtn"+n).addEventListener("click",function(){
+    playClick();
+    var start=(n-1)*12;
+    var end=Math.min(start+12, activeQS.length);
+    if(start>=activeQS.length){alert("لا توجد أسئلة كافية لهذا الاختبار!");return;}
+    sTestStart=start; sTestEnd=end;
+    sIdx=0; sSc=0; sAns=false;
+    goTo("pgSolo"); loadSolo(0);
+  });
+});
+
+var sIdx=0,sSc=0,sAns=false;
+// Topic selectors
+var topicIds=["topicPresentSimple","topicPastSimple","topicFutureSimple","topicPresentContinuous","topicPastContinuous","topicPresentPerfect"];
+var topicKeys=["present_simple","past_simple","future_simple","present_continuous","past_continuous","present_perfect"];
+topicIds.forEach(function(id,i){
+  document.getElementById(id).addEventListener("click",function(){
+    playClick();
+    var key=topicKeys[i];
+    if(!TOPICS[key].questions||TOPICS[key].questions.length===0){
+      alert("الأسئلة لم تُضَف بعد! قريباً ✏️");
+      return;
+    }
+    activeQS=TOPICS[key].questions;
+    document.getElementById("modeTitle").textContent=TOPICS[key].label;
+    goTo("pgMode");
+  });
+});
+document.getElementById("modeBack").addEventListener("click",function(){playClick();goTo("pgHome");});
+
+document.getElementById("soloBtn").addEventListener("click",function(){playClick();goTo("pgTestSelect");});
+document.getElementById("soloBack").addEventListener("click",function(){playClick();goTo("pgTestSelect");});
+document.getElementById("soloNext").addEventListener("click",function(){sIdx++;loadSolo(sIdx);});
+function loadSolo(i){
+  sAns=false;
+  var actualIdx=sTestStart+i;
+  var q=activeQS[actualIdx];
+  var total=sTestEnd-sTestStart;
+  document.getElementById("soloLbl").textContent="\u0633\u0624\u0627\u0644 "+(i+1)+" \u0645\u0646 "+total;
+  document.getElementById("soloQTxt").textContent=q.t;
+  document.getElementById("soloMsg").style.display="none";
+  document.getElementById("soloNext").style.display="none";
+  document.getElementById("soloScore").textContent="";
+  var grid=document.getElementById("soloChoices");grid.innerHTML="";
+  q.c.forEach(function(ch){
+    var b=document.createElement("button");b.className="cbtn";b.textContent=ch;
+    (function(btn,choice){btn.addEventListener("click",function(){
+      if(sAns)return;sAns=true;
+      document.querySelectorAll("#soloChoices .cbtn").forEach(function(b2){b2.disabled=true;});
+      var m=document.getElementById("soloMsg");
+      if(choice===q.a){btn.classList.add("ok");sSc++;m.innerHTML="\u1F389 \u0645\u0645\u062A\u0627\u0632! \u2014 <strong>"+q.e+"</strong>";m.className="rmsg ok";playOK();confetti();}
+      else{btn.classList.add("bad");document.querySelectorAll("#soloChoices .cbtn").forEach(function(b2){if(b2.textContent===q.a)b2.classList.add("ok");});m.innerHTML="\u274C \u062E\u0627\u0637\u0626\u0629 \u2014 <strong>"+q.e+"</strong><br><span style=\"font-size:.9rem;color:#8b1a1a;display:block;margin-top:5px\">\uD83D\uDCA1 "+q.r+"</span>";m.className="rmsg bad";playBad();}
+      m.style.display="block";
+      if(i<(sTestEnd-sTestStart)-1){document.getElementById("soloNext").style.display="inline-block";}
+      else{ showSoloWin(sSc, sTestEnd-sTestStart); }
+    });})(b,ch);
+    grid.appendChild(b);
+  });
+}
+
+/* ========== ZOMBIE GAME ========== */
+var PL,qPool,turnIdx,qIdx,freeStep,freeQs,freeAns,gAns,gCorrect;
+
+document.getElementById("zombieBtn").addEventListener("click",function(){playClick();goTo("pgNames");});
+document.getElementById("namesBack").addEventListener("click",function(){playClick();goTo("pgMode");});
+
+document.getElementById("startBtn").addEventListener("click",function(){
+  var names=["p1","p2","p3","p4","p5"].map(function(id){return document.getElementById(id).value.trim();}).filter(function(n){return n!=="";});
+  if(names.length<2){document.getElementById("nameErr").style.display="block";return;}
+  document.getElementById("nameErr").style.display="none";
+  PL=names.map(function(n){return {name:n,pts:10,shields:0,isZ:false,out:false,skipNext:false,slaveTurns:0,freeCorrect:0,slaveOwner:null};});
+  qPool=activeQS.slice().sort(function(){return Math.random()-.5;});
+  turnIdx=0;qIdx=0;
+  goTo("pgGame");
+  startTurn();
+});
+
+function active(){return PL.filter(function(p){return !p.out;});}
+function cur(){return PL[turnIdx%PL.length];}
+
+function startTurn(){
+  hideAreas();
+  var tries=0;
+  while(PL[turnIdx%PL.length].out&&tries<PL.length){turnIdx++;tries++;}
+  var notOut=PL.filter(function(p){return !p.out;});
+  var nonZombies=notOut.filter(function(p){return !p.isZ;});
+  if(notOut.length<=1||nonZombies.length===0){endGame();return;}
+  var p=cur();
+  renderSB();
+  document.getElementById("thdr").textContent="\u062F\u0648\u0631: "+p.name+(p.isZ?" \uD83E\uDDDF":"");
+  if(p.skipNext){p.skipNext=false;toast(p.name+" \u062A\u0645 \u062A\u062E\u0637\u064A \u062F\u0648\u0631\u0647 \u26A0\uFE0F");setTimeout(function(){turnIdx++;startTurn();},1600);return;}
+  if(p.slaveTurns>0){
+    // slave turn: show one question, correct = owner gets 10pts + freeCorrect++
+    showArea("areaFree");
+    var slaveUnused=qPool.slice(qIdx);if(slaveUnused.length===0){qPool=activeQS.slice().sort(function(){return Math.random()-.5;});qIdx=0;slaveUnused=qPool.slice();}var slaveQ=slaveUnused[0];qIdx++;
+    document.getElementById("freeCount").textContent="\u062F\u0648\u0631 \u0639\u0628\u062F \u2014 "+p.name+" (\u0635\u062D \u0644\u062A\u062A\u062D\u0631\u0631: "+p.freeCorrect+"/3)";
+    document.getElementById("freeQtxt").innerHTML=slaveQ.t;
+    document.getElementById("freeMsg").style.display="none";
+    document.getElementById("freeNext").style.display="none";
+    document.getElementById("freeNext").dataset.mode="slave";
+    var grid=document.getElementById("freeChoices");grid.innerHTML="";
+    var slaveAnswered=false;
+    slaveQ.c.forEach(function(ch){
+      var b=document.createElement("button");b.className="cbtn";b.textContent=ch;
+      (function(btn,choice){btn.addEventListener("click",function(){
+        if(slaveAnswered)return;slaveAnswered=true;
+        document.querySelectorAll("#freeChoices .cbtn").forEach(function(b2){b2.disabled=true;});
+        var m=document.getElementById("freeMsg");
+        p.slaveTurns--;
+        if(choice===slaveQ.a){
+          btn.classList.add("ok");
+          p.freeCorrect++;
+          if(p.slaveOwner)p.slaveOwner.pts+=10;
+          var freed=p.freeCorrect>=3;
+          m.textContent=(freed?"\uD83C\uDF89 \u062A\u062D\u0631\u0631 "+p.name+"!":"\u2705 \u0635\u062D! \u0627\u0644\u0639\u062F\u0627\u062F: "+p.freeCorrect+"/3")+(p.slaveOwner?" (+10 \uD83D\uDCB0 \u0644\u0640"+p.slaveOwner.name+")":"");
+          m.className="rmsg ok";playOK();
+          if(freed){p.isZ=false;p.slaveTurns=0;confetti();}
+        } else {
+          btn.classList.add("bad");document.querySelectorAll("#freeChoices .cbtn").forEach(function(b2){if(b2.textContent===slaveQ.a)b2.classList.add("ok");});
+          m.textContent="\u274C \u062E\u0627\u0637\u0626\u0629 \u2014 \u0627\u0644\u0639\u062F\u0627\u062F \u064A\u0641\u0636\u0644 "+p.freeCorrect+"/3";
+          m.className="rmsg bad";playBad();
+        }
+        m.style.display="block";document.getElementById("freeNext").style.display="inline-block";
+        renderSB();
+      });})(b,ch);
+      grid.appendChild(b);
+    });
+    return;
+  }
+  if(p.isZ){showArea("areaZChoice");}
+  else{showArea("areaQ");loadGQ();}
+}
+
+function hideAreas(){["areaQ","areaShop","areaZChoice","areaFree","areaEnd"].forEach(function(id){document.getElementById(id).style.display="none";});}
+function showArea(id){hideAreas();document.getElementById(id).style.display="block";}
+
+/* ── QUESTION ── */
+function loadGQ(){
+  gAns=false;gCorrect=false;
+  if(qIdx>=qPool.length){endGame();return;}
+  var q=qPool[qIdx];
+  document.getElementById("gQlbl").textContent="\u0633\u0624\u0627\u0644 "+(qIdx+1);
+  document.getElementById("gQtxt").textContent=q.t;
+  document.getElementById("gQmsg").style.display="none";
+  document.getElementById("gQnext").style.display="none";
+  var grid=document.getElementById("gChoices");grid.innerHTML="";
+  q.c.forEach(function(ch){
+    var b=document.createElement("button");b.className="cbtn";b.textContent=ch;
+    (function(btn,choice){btn.addEventListener("click",function(){
+      if(gAns)return;gAns=true;
+      document.querySelectorAll("#gChoices .cbtn").forEach(function(b2){b2.disabled=true;});
+      var m=document.getElementById("gQmsg");var p=cur();
+      if(choice===q.a){
+        btn.classList.add("ok");p.pts+=10;gCorrect=true;
+        m.innerHTML="\u{1F389} \u0635\u062D! <strong>+10 \u0646\u0642\u0627\u0637</strong> \u2014 "+q.e;
+        m.className="rmsg ok";playOK();
+      } else {
+        btn.classList.add("bad");document.querySelectorAll("#gChoices .cbtn").forEach(function(b2){if(b2.textContent===q.a)b2.classList.add("ok");});
+        m.innerHTML="\u274C \u062E\u0627\u0637\u0626\u0629 \u2014 "+q.e+"<br><span style=\"font-size:.9rem;color:#8b1a1a;display:block;margin-top:5px\">\uD83D\uDCA1 "+q.r+"</span>";
+        m.className="rmsg bad";playBad();
+      }
+      m.style.display="block";
+      document.getElementById("gQnext").style.display="inline-block";
+      qIdx++;renderSB();
+    });})(b,ch);
+    grid.appendChild(b);
+  });
+}
+
+document.getElementById("gQnext").addEventListener("click",function(){
+  var p=cur();
+  if(!gCorrect){
+    // wrong answer: no points, just skip to next turn
+    toast(p.name+" أجاب غلط — لا نقاط هذا الدور");
+    renderSB();setTimeout(function(){turnIdx++;startTurn();},1600);
+  } else {showArea("areaShop");buildShop();}
+});
+
+/* ── SHOP ── */
+function buildShop(){
+  document.getElementById("shopMsg").style.display="none";
+  document.getElementById("shopTgtDiv").style.display="none";
+  var p=cur();var grid=document.getElementById("shopGrid");grid.innerHTML="";
+  var items=[
+    {id:"shield",icon:"\uD83D\uDEE1\uFE0F",title:"\u062F\u0631\u0639",cost:20,desc:"\u064A\u062D\u0645\u064A\u0643 \u0645\u0646 \u0627\u0644\u0632\u0648\u0645\u0628\u064A \u0645\u0631\u0629 (\u062F\u0631\u0639\u064A\u0646 \u0636\u062F \u0633\u0631\u0642\u0629 \u0627\u0644\u062F\u0648\u0631)",cls:"s-sh"},
+    {id:"zombie",icon:"\uD83E\uDDDF",title:"\u062A\u062D\u0648\u064A\u0644 \u0632\u0648\u0645\u0628\u064A",cost:30,desc:"\u062D\u0648\u0644 \u0644\u0627\u0639\u0628 \u0644\u0632\u0648\u0645\u0628\u064A (\u0627\u0644\u062F\u0631\u0639 \u064A\u0643\u0633\u0631\u0647)",cls:"s-zb"},
+    {id:"steal",icon:"\uD83D\uDCB8",title:"\u0633\u0631\u0642\u0629 \u0643\u0644 \u0627\u0644\u0641\u0644\u0648\u0633",cost:70,desc:"\u062F\u0631\u0639\u0627\u0646 \u064A\u062D\u0645\u064A\u0627\u0646 \u0645\u0646\u0647\u0627 \u0648\u064A\u062A\u0643\u0633\u0631\u0627\u0646",cls:"s-st"},
+    {id:"secret",icon:"\uD83D\uDC80",title:"\u0627\u0644\u062D\u0627\u062C\u0629 \u0627\u0644\u0633\u0631\u064A\u0629",cost:200,desc:"\u2753\u2753\u2753",cls:"s-sc"}
+  ];
+  PL.filter(function(pl){return pl.isZ&&!pl.out&&pl!==p&&!(pl.slaveTurns>0);}).forEach(function(zp){
+    items.push({id:"slave_"+zp.name,icon:"\u26D3\uFE0F",title:"\u0639\u0628\u062F: "+zp.name,cost:20,desc:"3 \u0623\u062F\u0648\u0627\u0631 \u0645\u0646 "+zp.name+" \u062B\u0645 \u064A\u062A\u062D\u0631\u0631",cls:"s-sl"});
+  });
+  items.forEach(function(item){
+    var el=document.createElement("div");
+    el.className="si "+item.cls+(p.pts<item.cost?" dis":"");
+    el.innerHTML="<div class=\"si-t\">"+item.icon+" "+item.title+"</div><div class=\"si-c\">\uD83D\uDCB0 "+item.cost+" \u0646\u0642\u0637\u0629</div><div class=\"si-d\">"+item.desc+"</div>";
+    if(p.pts>=item.cost){(function(it){el.addEventListener("click",function(){handleBuy(it.id,it.cost,it.title);});})(item);}
+    grid.appendChild(el);
+  });
+}
+
+function handleBuy(id,cost,title){
+  var p=cur();
+  if(id==="shield"){if(p.shields>=3){showShopMsg("\u0644\u0627 \u064A\u0645\u0643\u0646 \u0627\u0645\u062A\u0644\u0627\u0643 \u0623\u0643\u062B\u0631 \u0645\u0646 3 \u062F\u0631\u0648\u0639! \uD83D\uDEE1\uFE0F","bad");return;}p.pts-=cost;p.shields++;renderSB();buildShop();showShopMsg("\uD83D\uDEE1\uFE0F \u0627\u0634\u062A\u0631\u064A\u062A \u062F\u0631\u0639! \u0639\u0646\u062F\u0643 "+p.shields+" \u062F\u0631\u0639","ok");}
+  else if(id==="secret"){
+    p.pts-=cost;var tot=0;
+    PL.forEach(function(pl){if(pl!==p&&!pl.out){var h=Math.floor(pl.pts/2);pl.pts-=h;p.pts+=h;tot+=h;}});
+    renderSB();buildShop();showShopMsg("\uD83D\uDC80 \u0633\u0631\u0642\u062A "+tot+" \u0646\u0642\u0637\u0629 \u0645\u0646 \u0627\u0644\u062C\u0645\u064A\u0639!","ok");playOK();
+  } else if(id.indexOf("slave_")===0){
+    var sn=id.replace("slave_","");var sl=PL.filter(function(pl){return pl.name===sn;})[0];
+    if(sl){p.pts-=cost;sl.isZ=true;sl.slaveTurns+=3;sl.slaveOwner=p;sl.freeCorrect=sl.freeCorrect||0;renderSB();buildShop();showShopMsg("\u26D3\uFE0F \u0627\u0634\u062A\u0631\u064A\u062A "+sn+" \u0643\u0639\u0628\u062F \u0644\u0640\u0663 \u0623\u062F\u0648\u0627\u0631","ok");}
+  } else {
+    var tgts=PL.filter(function(pl){return !pl.out&&pl!==p&&(id==="zombie"?!pl.isZ:true);});
+    if(!tgts.length){showShopMsg("\u0645\u0641\u064A\u0634 \u0623\u0647\u062F\u0627\u0641 \u0645\u062A\u0627\u062D\u0629!","bad");return;}
+    document.getElementById("shopTgtTitle").textContent="\u0627\u062E\u062A\u0627\u0631 \u0627\u0644\u0647\u062F\u0641 \u2014 "+title;
+    var list=document.getElementById("shopTgtList");list.innerHTML="";
+    tgts.forEach(function(tp){
+      var b=document.createElement("button");b.className="tgt";
+      b.textContent=tp.name+(tp.isZ?" \uD83E\uDDDF":"")+(tp.shields>0?" \uD83D\uDEE1\uFE0F\xD7"+tp.shields:"");
+      (function(tgt){b.addEventListener("click",function(){applyItem(id,cost,tgt);});})(tp);
+      list.appendChild(b);
+    });
+    document.getElementById("shopTgtDiv").style.display="block";
+  }
+}
+
+function applyItem(id,cost,tgt){
+  var p=cur();
+  document.getElementById("shopTgtDiv").style.display="none";
+  p.pts-=cost;
+  if(id==="zombie"){
+    if(tgt.shields>0){tgt.shields--;showShopMsg("\uD83D\uDEE1\uFE0F "+tgt.name+" \u0643\u0633\u0631 \u062F\u0631\u0639\u0647 \u0648\u0646\u062C\u0627!","bad");}
+    else{var hh=Math.floor(tgt.pts/2);tgt.pts-=hh;p.pts+=hh;tgt.isZ=true;showShopMsg("\uD83E\uDDDF "+tgt.name+" \u0623\u0635\u0628\u062D \u0632\u0648\u0645\u0628\u064A! (+"+hh+" \uD83D\uDCB0)","ok");playBad();}
+  } else if(id==="steal"){
+    if(tgt.shields>=2){tgt.shields-=2;showShopMsg("\uD83D\uDEE1\uFE0F\uD83D\uDEE1\uFE0F "+tgt.name+" \u0643\u0633\u0631 \u062F\u0631\u0639\u064A\u0646 \u0648\u0646\u062C\u0627!","bad");}
+    else{var stolen2=tgt.pts;var prevSh=tgt.shields;tgt.shields=0;tgt.pts=0;p.pts+=stolen2;showShopMsg("\uD83D\uDCB8 \u0633\u0631\u0642\u062A \u0643\u0644 \u0641\u0644\u0648\u0633 "+tgt.name+"! (+"+stolen2+" \uD83D\uDCB0)"+(prevSh>0?" (\u062F\u0631\u0639\u0647 \u0627\u062A\u0643\u0633\u0631)":""),"ok");}
+  }
+  renderSB();buildShop();
+}
+
+function showShopMsg(msg,type){var m=document.getElementById("shopMsg");m.textContent=msg;m.className="rmsg "+type;m.style.display="block";}
+document.getElementById("cancelTgt").addEventListener("click",function(){document.getElementById("shopTgtDiv").style.display="none";});
+document.getElementById("shopDone").addEventListener("click",function(){turnIdx++;startTurn();});
+
+/* ── ZOMBIE CHOICE ── */
+document.getElementById("zPassBtn").addEventListener("click",function(){
+  toast(cur().name+" \u062A\u062E\u0637\u0649 \u062F\u0648\u0631\u0647 \uD83E\uDDDF");
+  setTimeout(function(){turnIdx++;startTurn();},1400);
+});
+/* consecutive free questions state */
+var freeConsec=0,freeConsecQs=[];
+function startFreeAttempt(){
+  freeConsec=0;
+  var used=qPool.slice(0,qIdx);var unused=qPool.filter(function(q){return used.indexOf(q)<0;});if(unused.length<3){qPool=activeQS.slice().sort(function(){return Math.random()-.5;});qIdx=0;unused=qPool.slice();}freeConsecQs=unused.slice(0,3);
+  loadFreeConsecQ();
+}
+function loadFreeConsecQ(){
+  var p=cur();
+  showArea("areaFree");
+  var q=freeConsecQs[freeConsec];
+  document.getElementById("freeCount").textContent="\u0633\u0624\u0627\u0644 "+(freeConsec+1)+" \u0645\u0646 3 \u2014 \u0623\u062C\u0628 \u0635\u062D \u0644\u0644\u062A\u062D\u0631\u0631";
+  document.getElementById("freeQtxt").innerHTML=q.t;
+  document.getElementById("freeMsg").style.display="none";
+  document.getElementById("freeNext").style.display="none";
+  document.getElementById("freeNext").dataset.mode="freeConsec";
+  var grid=document.getElementById("freeChoices");grid.innerHTML="";
+  var fAns=false;
+  q.c.forEach(function(ch){
+    var b=document.createElement("button");b.className="cbtn";b.textContent=ch;
+    (function(btn,choice){btn.addEventListener("click",function(){
+      if(fAns)return;fAns=true;
+      document.querySelectorAll("#freeChoices .cbtn").forEach(function(b2){b2.disabled=true;});
+      var m=document.getElementById("freeMsg");
+      if(choice===q.a){
+        btn.classList.add("ok");freeConsec++;
+        var freed=freeConsec>=3;
+        m.textContent=freed?"\uD83C\uDF89 \u062A\u062D\u0631\u0631! \u0623\u0646\u062A \u062D\u0631 \u0627\u0644\u0622\u0646!":"\u2705 \u0635\u062D! "+freeConsec+"/3 - \u0643\u0645\u0644";
+        m.className="rmsg ok";playOK();
+        if(freed){p.isZ=false;p.freeCorrect=0;confetti();}
+      } else {
+        btn.classList.add("bad");document.querySelectorAll("#freeChoices .cbtn").forEach(function(b2){if(b2.textContent===q.a)b2.classList.add("ok");});
+        m.innerHTML="\u274C \u0641\u0634\u0644\u062A! "+p.name+" \u062E\u0631\u062C \u0645\u0646 \u0627\u0644\u0644\u0639\u0628\u0629! \uD83D\uDC80";
+        m.className="rmsg bad";playBad();
+        p.out=true;
+      }
+      m.style.display="block";document.getElementById("freeNext").style.display="inline-block";
+      renderSB();
+    });})(b,ch);
+    grid.appendChild(b);
+  });
+}
+document.getElementById("zFreeBtn").addEventListener("click",function(){
+  startFreeAttempt();
+});
+
+/* ── FREEDOM ── */
+function loadFreeQ(){
+  freeAns=false;
+  var q=freeQs[freeStep];
+  document.getElementById("freeCount").textContent="\u0633\u0624\u0627\u0644 "+(freeStep+1)+" \u0645\u0646 3 \u2014 \u0623\u062C\u0628 \u0635\u062D \u0644\u0644\u062A\u062D\u0631\u0631";
+  document.getElementById("freeQtxt").textContent=q.t;
+  document.getElementById("freeMsg").style.display="none";
+  document.getElementById("freeNext").style.display="none";
+  document.getElementById("freeNext").dataset.res="";
+  var grid=document.getElementById("freeChoices");grid.innerHTML="";
+  q.c.forEach(function(ch){
+    var b=document.createElement("button");b.className="cbtn";b.textContent=ch;
+    (function(btn,choice){btn.addEventListener("click",function(){
+      if(freeAns)return;freeAns=true;
+      document.querySelectorAll("#freeChoices .cbtn").forEach(function(b2){b2.disabled=true;});
+      var m=document.getElementById("freeMsg");
+      if(choice===q.a){btn.classList.add("ok");m.textContent="\u2705 \u0635\u062D!";m.className="rmsg ok";playOK();document.getElementById("freeNext").dataset.res="ok";}
+      else{btn.classList.add("bad");document.querySelectorAll("#freeChoices .cbtn").forEach(function(b2){if(b2.textContent===q.a)b2.classList.add("ok");});m.innerHTML="\u274C \u062E\u0627\u0637\u0626\u0629! \u0647\u0630\u0627 \u0627\u0644\u0633\u0624\u0627\u0644 \u0645\u0627 \u0628\u064A\u062A\u062D\u0633\u0628\u0634";m.className="rmsg bad";playBad();document.getElementById("freeNext").dataset.res="bad";}
+      m.style.display="block";document.getElementById("freeNext").style.display="inline-block";
+    });})(b,ch);
+    grid.appendChild(b);
+  });
+}
+
+document.getElementById("freeNext").addEventListener("click",function(){
+  var p=cur();
+  var mode=this.dataset.mode;
+  if(mode==="freeConsec"){
+    if(p.out){turnIdx++;startTurn();return;}
+    if(p.isZ===false){turnIdx++;startTurn();return;}
+    // correct, not yet freed — next question
+    loadFreeConsecQ();
+  } else {
+    turnIdx++;startTurn();
+  }
+});
+
+/* ── SCOREBOARD ── */
+function renderSB(){
+  var p=cur();var sb=document.getElementById("sb");sb.innerHTML="";
+  PL.forEach(function(pl,i){
+    var el=document.createElement("div");
+    var cls="pc "+(pl.out?"out":pl.isZ?"zombie":"alive")+(pl===p?" cur":"");
+    el.className=cls;
+    var sh=pl.shields>0?"\uD83D\uDEE1\uFE0F".repeat(pl.shields):"";
+    el.innerHTML="<div class=\"pcn\">"+(pl.isZ?"\uD83E\uDDDF ":pl.out?"\uD83D\uDC80 ":"\uD83E\uDDD1 ")+pl.name+"</div><div class=\"pcp\">\uD83D\uDCB0 "+pl.pts+"</div><div class=\"pcb\">"+sh+"</div>";
+    sb.appendChild(el);
+  });
+}
+
+/* ── END ── */
+function endGame(){
+  hideAreas();showArea("areaEnd");
+  var alive=PL.filter(function(p){return !p.out&&!p.isZ;});
+  var sorted=PL.filter(function(p){return !p.out;}).sort(function(a,b){return b.pts-a.pts;});
+  var em="";
+  if(alive.length===0){em="\uD83E\uDDDF \u0627\u0644\u062C\u0645\u064A\u0639 \u0623\u0635\u0628\u062D\u0648\u0627 \u0632\u0648\u0645\u0628\u064A! \u0644\u0627 \u064A\u0648\u062C\u062F \u0641\u0627\u0626\u0632.";}
+  else if(sorted.length>0){em="\uD83C\uDFC6 \u0627\u0644\u0641\u0627\u0626\u0632: "+sorted[0].name+" \u0628\u0640 "+sorted[0].pts+" \u0646\u0642\u0637\u0629!";confetti();playOK();}
+  document.getElementById("endMsg").textContent=em;
+  var ranks="\u062A\u0631\u062A\u064A\u0628 \u0627\u0644\u0646\u0642\u0627\u0637:<br>";
+  sorted.forEach(function(p,i){ranks+=(i+1)+". "+p.name+": "+p.pts+"\uD83D\uDCB0 "+(p.isZ?"\uD83E\uDDDF":p.out?"\uD83D\uDC80":"\u2705")+"<br>";});
+  document.getElementById("endRanks").innerHTML=ranks;
+  renderSB();
+}
+document.getElementById("replayBtn").addEventListener("click",function(){playClick();goTo("pgNames");});
+document.getElementById("leaderHomeBtn").addEventListener("click",function(){playClick();goTo("pgHome");});
+document.getElementById("leaderReplayBtn").addEventListener("click",function(){playClick();goTo("pgNames");});
+document.getElementById("homeBtn").addEventListener("click",function(){playClick();
+  // Sort by effective points: zombies/slaves count half their pts
+  function effPts(p){return (p.isZ||p.slaveTurns>0)?Math.floor(p.pts/2):p.pts;}
+  var sorted=PL.slice().sort(function(a,b){
+    if(a.out&&!b.out)return 1;if(!a.out&&b.out)return -1;
+    return effPts(b)-effPts(a);
+  });
+  var html="";
+  var medals=["🥇","🥈","🥉"];
+  var rank=0,prevPts=null,sameCount=0;
+  // group by pts
+  var groups=[];
+  sorted.forEach(function(p){
+    if(p.pts!==prevPts){groups.push([]);prevPts=p.pts;}
+    groups[groups.length-1].push(p);
+  });
+  var rankIdx=0;
+  groups.forEach(function(group){
+    var medal=medals[rankIdx]||"🏅";
+    var isTie=group.length>1;
+    var isFirst=rankIdx===0;
+    // if tie, show all in one row
+    if(isTie){
+      var names=group.map(function(p){return p.name;}).join(" & ");
+      var statuses=group.map(function(p){return p.out?"💀 خارج":p.isZ?"🧟 زومبي":"✅ ناجي";}).join(" | ");
+      html+="<div style=\"display:flex;align-items:center;gap:12px;padding:12px 16px;background:"+(isFirst?"rgba(255,215,0,.15)":"rgba(33,150,243,.07)")+";border-radius:14px;margin-bottom:10px;border:2px solid "+(isFirst?"rgba(255,200,0,.4)":"rgba(33,150,243,.2)")+";\">";
+      html+="<span style=\"font-size:1.8rem\">"+medal+"</span>";
+      html+="<div style=\"flex:1;text-align:right\">";
+      html+="<div style=\"font-family:'Scheherazade New',serif;font-size:1.4rem;font-weight:700;color:#0a3060\">"+names+"</div>";
+      html+="<div style=\"font-size:.95rem;color:#555\">"+statuses+"</div></div>";
+      var ep=effPts(group[0]);var isHalf=(group[0].isZ||group[0].slaveTurns>0);
+    html+="<div style=\"font-family:'Scheherazade New',serif;font-size:1.5rem;font-weight:700;color:#1565c0\">"+(isHalf?"<span style=\"text-decoration:line-through;opacity:.5;font-size:1.1rem\">"+group[0].pts+"</span> "+ep:ep)+" 💰</div>";
+      html+="</div>";
+    } else {
+      var p=group[0];
+      var status=p.out?"💀 خارج":p.isZ?"🧟 زومبي":"✅ ناجي";
+      html+="<div style=\"display:flex;align-items:center;gap:12px;padding:12px 16px;background:"+(isFirst?"rgba(255,215,0,.15)":"rgba(33,150,243,.07)")+";border-radius:14px;margin-bottom:10px;border:2px solid "+(isFirst?"rgba(255,200,0,.4)":"rgba(33,150,243,.2)")+";\">";
+      html+="<span style=\"font-size:1.8rem\">"+medal+"</span>";
+      html+="<div style=\"flex:1;text-align:right\">";
+      html+="<div style=\"font-family:'Scheherazade New',serif;font-size:1.4rem;font-weight:700;color:#0a3060\">"+p.name+"</div>";
+      html+="<div style=\"font-size:1rem;color:#555\">"+status+"</div></div>";
+      var ep2=effPts(p);var isHalf2=(p.isZ||p.slaveTurns>0);
+      html+="<div style=\"font-family:'Scheherazade New',serif;font-size:1.5rem;font-weight:700;color:#1565c0\">"+(isHalf2?"<span style=\"text-decoration:line-through;opacity:.5;font-size:1.1rem\">"+p.pts+"</span> "+ep2:ep2)+" 💰</div>";
+      html+="</div>";
+    }
+    rankIdx+=group.length;
+  });
+  document.getElementById("leaderList").innerHTML=html;
+  goTo("pgLeader");
+});
+</script>
+</body>
+</html>
